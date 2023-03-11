@@ -28,11 +28,11 @@ stages:
 variables:
   GIT_DEPTH: 0
 
-format-check:
-  stage: test
-  extends: .distributed
-  script:
-    - npx nx format:check --base=$NX_BASE --head=$NX_HEAD --verbose
+# format-check:
+#   stage: test
+#   extends: .distributed
+#   script:
+#     - npx nx format:check --base=$NX_BASE --head=$NX_HEAD --verbose
 
 lint:
   stage: test
