@@ -9,6 +9,8 @@ stages:
   only:
     - main
     - merge_requests
+    - feature/*
+    - fix/*
   cache:
     key:
       files:
