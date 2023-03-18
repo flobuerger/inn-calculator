@@ -19,6 +19,7 @@ stages:
     paths:
       - .npm/
   before_script:
+    - npm ci
     - npm set cache .npm
     - npm ci --prefer-offline
     - NX_HEAD=$CI_COMMIT_SHA
