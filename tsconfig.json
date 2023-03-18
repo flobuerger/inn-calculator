@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strictPropertyInitialization": false,
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,

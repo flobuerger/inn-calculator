@@ -1,51 +1,28 @@
-import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, map, Observable } from 'rxjs';
 
-export interface IState {
-  id: string;
-}
+export class State<T> {
+  private state$: BehaviorSubject<T>;
+  private initialState: T;
 
-export class StateService<T extends IState> {
-  protected stateList: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
-  stateLists$: Observable<T[]> = this.stateList
-    .asObservable()
-    .pipe(shareReplay(1));
-
-  SetList(items: T[]) {
-    this.stateList.next(items);
-    return this.stateLists$;
+  constructor(initialState: T) {
+    this.initialState = { ...initialState };
+    this.state$ = new BehaviorSubject<T>(this.initialState);
   }
 
-  get currentList(): T[] {
-    return this.stateList.getValue();
+  protected get state(): T {
+    return this.state$.getValue();
   }
 
-  // add item, by cloning the current list with the new item
-  addItem(item: T) {
-    this.stateList.next([...this.currentList, item]);
+  protected select<K>(mapFunction: (state: T) => K): Observable<K> {
+    return this.state$.asObservable().pipe(
+      map((state: T) => mapFunction(state)),
+      distinctUntilChanged()
+    );
   }
-
-  // edit item, by finding the item by id, clone the list with the
-  // updated item (see note below)
-  editItem(item: T): void {
-    const currentList = this.currentList;
-    const index = currentList.findIndex((n) => n.id === item.id);
-    if (index >= -1) {
-      currentList[index] == item;
-      this.stateList.next([...currentList]);
-    }
-  }
-
-  // find item by id then clone the list without it
-  removeItem(item: T): void {
-    this.stateList.next(this.currentList.filter((n) => n.id == item.id));
-  }
-
-  appendList(items: T[]): void {
-    const currentList = this.currentList.concat(items);
-    this.stateList.next(currentList);
-  }
-
-  prependItem(item: T): void {
-    this.stateList.next([item, ...this.currentList]);
+  protected setState(newState: Partial<T>) {
+    this.state$.next({
+      ...this.state,
+      ...newState,
+    });
   }
 }
