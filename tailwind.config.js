@@ -10,9 +10,9 @@ module.exports = {
       {
         ufc: {
           primary: '#6F732F',
-          secondary: '#9DC0BC',
+          secondary: '#8D918B',
           accent: '#D7B377',
-          neutral: '#D8D0C1',
+          neutral: '#DDDFDF',
           text: '#FFFFFF',
         },
       },

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product';
+import { Product, ProductType } from '../models/product';
 
 @Injectable({ providedIn: 'root' })
 export class ProductMockService {
@@ -14,6 +14,9 @@ export class ProductMockService {
         shortDescription: 'Bier',
         sortOrder: 1,
         currency: '€',
+        type: ProductType.DRINK,
+        amount: 500,
+        unit: 'ml',
       },
       {
         id: '1',
@@ -24,6 +27,9 @@ export class ProductMockService {
         shortDescription: 'Wein',
         sortOrder: 2,
         currency: '€',
+        type: ProductType.DRINK,
+        amount: 500,
+        unit: 'ml',
       },
       {
         id: '2',
@@ -34,6 +40,9 @@ export class ProductMockService {
         shortDescription: 'Cola',
         sortOrder: 3,
         currency: '€',
+        type: ProductType.DRINK,
+        amount: 250,
+        unit: 'ml',
       },
     ];
   }

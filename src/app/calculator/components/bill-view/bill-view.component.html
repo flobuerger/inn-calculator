@@ -1,3 +1,33 @@
-<div class="">
-  <div>Test</div>
+<div class="text-black divide-y-2">
+  <div class="flex-grow">
+    <div *ngFor="let basketProduct of basketProducts">
+      <div class="flex">
+        <div class="flex-none">{{ basketProduct.count }}</div>
+        <div class="flex-none mx-2">x</div>
+        <div class="flex-auto w-64">
+          {{ basketProduct.product.shortDescription }}
+        </div>
+        <div class="flex-none">
+          {{ basketProduct.product.price * basketProduct.count }}
+          {{ basketProduct.product.currency }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex w-full">
+    <div class="flex-grow">Summe:</div>
+    <div class="justify-end flex-none">{{ priceAmount }} {{ currency }}</div>
+  </div>
+  <div>
+    <a class="btn btn-primary w-full" href="#checkout-modal">Bezahlen</a>
+  </div>
+</div>
+
+<div class="modal" id="checkout-modal">
+  <div class="modal-box text-black">
+    <p class="py-4">Zu bezahlender Betrag: {{ priceAmount }} {{ currency }}</p>
+    <div class="modal-action">
+      <a (click)="checkout()" href="#" class="btn">Bezahlt</a>
+    </div>
+  </div>
 </div>

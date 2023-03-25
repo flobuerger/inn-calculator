@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from '../../models/product';
+import { BasketPriceService } from '../../services/states/basket-price.service';
 import { ProductStateService } from '../../services/states/product-state.service';
 
 @Component({

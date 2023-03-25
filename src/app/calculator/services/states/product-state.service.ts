@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { State } from 'src/app/services/state/state-model.service';
 import { Product } from '../../models/product';
-import { ProductStates } from '../../models/product-state';
+import { ProductStates } from '../../models/product.state';
 import { ProductMockService } from '../product-mock.service';
 
 @Injectable({

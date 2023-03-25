@@ -7,4 +7,12 @@ export interface Product {
   sortOrder: number;
   price: number;
   currency: string;
+  type: ProductType;
+  amount: number;
+  unit: string;
+}
+
+export enum ProductType {
+  'DRINK' = 0,
+  'FOOD' = 1,
 }
