@@ -14,7 +14,7 @@ stages:
     - /^fix.*$/
   before_script:
     - yarn install
-    - npm i
+    - npm install --save @types/yargs
     - npm ci
     - npm set cache .npm
     - npm ci --prefer-offline
