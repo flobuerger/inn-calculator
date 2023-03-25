@@ -1,5 +1,9 @@
 image: node:16
 
+cache:
+  paths:
+  - node_modules/
+
 stages:
   - test
   - build
