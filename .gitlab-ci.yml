@@ -1,51 +1,57 @@
-image: node:16
+image: node:12.16.3-alpine3.11
 
 stages:
-  - test
-  - build
+  - setup
+  - distributed-tasks
 
-.distributed:
-  interruptible: true
-  only:
-    - main
-    - merge_requests
-    - /^feature.*$/
-    - /^features.*$/
-    - /^fix.*$/
+install:deps:
   cache:
     key:
       files:
-        - package-lock.json
+        - yarn.lock
     paths:
-      - .npm/
-  before_script:
-    - npm ci --cache .npm --prefer-offline
-    - NX_HEAD=$CI_COMMIT_SHA
-    - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
+      - node_modules
+      - .yarn
+    policy: pull-push
+  stage: setup
+  interruptible: true
+  script:
+    - yarn install --pure-lockfile --cache-folder .yarn
+  artifacts:
+    paths:
+      - node_modules
 
-variables:
-  GIT_DEPTH: 0
+.distributed:
+  stage: distributed-tasks
+  interruptible: true
+  artifacts:
+    paths:
+      - node_modules/.cache/nx
 
-format-check:
-  stage: test
+format:
   extends: .distributed
   script:
-    - npx nx format:check --base=$NX_BASE --head=$NX_HEAD
+    - CI_BASE_SHA=$([[ "$CI_COMMIT_REF_SLUG" == "master" ]] && echo "master~1" || echo "master")
+    - yarn format:check --base=$CI_BASE_SHA
 
 lint:
-  stage: test
   extends: .distributed
+  parallel: 8
   script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t lint --parallel=3
+    - node ./tools/scripts/run-many.js lint $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG
 
 test:
-  stage: test
   extends: .distributed
+  parallel: 8
   script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t test --parallel=3 --configuration=ci
+    - node ./tools/scripts/run-many.js test $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG --parallel
 
 build:
-  stage: build
   extends: .distributed
+  parallel: 2
   script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
+    - node ./tools/scripts/run-many.js build $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG --prod
+  artifacts:
+    paths:
+      - node_modules/.cache/nx
+      - dist
