@@ -15,7 +15,6 @@ stages:
   before_script:
     - yarn install
     - npm install --save @types/yargs
-    - npm ci
     - npm set cache .npm
     - npm ci --prefer-offline
     - NX_HEAD=$CI_COMMIT_SHA
