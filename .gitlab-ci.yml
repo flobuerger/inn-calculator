@@ -14,9 +14,6 @@ stages:
       - .npm/
   before_script:
     - npm ci
-    - yarn install
-    - yarn add @yarnpkg/parsers
-    - yarn add @yarnpkg/lockfile
     - NX_HEAD=$CI_COMMIT_SHA
     - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
 
