@@ -13,6 +13,7 @@ stages:
     - /^features.*$/
     - /^fix.*$/
   before_script:
+    - yarn install
     - npm i
     - npm ci
     - npm set cache .npm
