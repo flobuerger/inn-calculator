@@ -13,6 +13,9 @@ stages:
     - /^features.*$/
     - /^fix.*$/
   before_script:
+    - rm package-lock.json
+    - rm -r node_modules
+    - npm install @types/node --save-dev
     - yarn install
     - npm install --save @types/yargs
     - npm set cache .npm
