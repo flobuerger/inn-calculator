@@ -1,1 +1,7 @@
-<p>product-list-view works!</p>
+<div class="flex gap-4 w-full h-full flex-wrap overflow-scroll">
+  <div *ngFor="let product of products">
+    <inn-calculator-product-card
+      [product]="product"
+    ></inn-calculator-product-card>
+  </div>
+</div>

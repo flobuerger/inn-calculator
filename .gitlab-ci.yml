@@ -6,12 +6,6 @@ stages:
 
 .distributed:
   interruptible: true
-  only:
-    - main
-    - merge_requests
-    - /^feature.*$/
-    - /^features.*$/
-    - /^fix.*$/
   cache:
     key:
       files:
@@ -19,35 +13,36 @@ stages:
     paths:
       - .npm/
   before_script:
-    - npm install
-    - npm set cache .npm
-    - npm ci --prefer-offline
+    - npm i
+    - yarn add @yarnpkg/parsers
+    - yarn add @yarnpkg/lockfile
+    - npm ci
     - NX_HEAD=$CI_COMMIT_SHA
     - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
 
 variables:
   GIT_DEPTH: 0
 
-# format-check:
-#   stage: test
-#   extends: .distributed
-#   script:
-#     - npx nx format:check --base=$NX_BASE --head=$NX_HEAD --verbose
+format-check:
+  stage: test
+  extends: .distributed
+  script:
+    - npx nx format:check --base=$NX_BASE --head=$NX_HEAD
 
 lint:
   stage: test
   extends: .distributed
   script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD --target=lint --parallel=3
+    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t lint --parallel=3
 
 test:
   stage: test
   extends: .distributed
   script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD --target=test --parallel=3 --configuration=ci
+    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t test --parallel=3 --configuration=ci
 
 build:
   stage: build
   extends: .distributed
   script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD --target=build --parallel=3
+    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3

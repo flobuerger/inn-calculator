@@ -1,0 +1,24 @@
+<div
+  class="card bg-secondary product_card cursor-pointer"
+  (click)="addToBasket(product)"
+>
+  <div class="card-body">
+    <div class="card-title">
+      <div class="flex-col align-middle justify-center w-full min-w-fit">
+        <div class="text-center">
+          <div class="grow">{{ product.shortDescription }}</div>
+        </div>
+        <div class="text-center min-w-fit">
+          <div class="flex-none font-thin text-sm">
+            {{ product.amount }} {{ product.unit }}
+          </div>
+          <div class="text-center min-w-fit">
+            <div class="flex-none font-thin text-sm">
+              {{ product.price }} {{ product.currency }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
