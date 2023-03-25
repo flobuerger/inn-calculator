@@ -6,9 +6,6 @@ stages:
 
 .distributed:
   interruptible: true
-  only:
-    - main
-    - merge_requests
   cache:
     key:
       files:
