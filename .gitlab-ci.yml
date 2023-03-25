@@ -12,12 +12,6 @@ stages:
     - /^feature.*$/
     - /^features.*$/
     - /^fix.*$/
-  cache:
-    key:
-      files:
-        - package-lock.json
-    paths:
-      - .npm/
   before_script:
     - npm ci
     - npm set cache .npm
