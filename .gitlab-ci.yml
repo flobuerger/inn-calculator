@@ -13,13 +13,9 @@ stages:
     - /^features.*$/
     - /^fix.*$/
   before_script:
-    - rm package-lock.json
-    - rm -r node_modules
     - npm install @types/node --save-dev
     - yarn install
     - npm install --save @types/yargs
-    - npm set cache .npm
-    - npm ci --prefer-offline
     - NX_HEAD=$CI_COMMIT_SHA
     - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
 
