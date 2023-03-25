@@ -19,6 +19,7 @@ stages:
     paths:
       - .npm/
   before_script:
+    - npm cache clean --force
     - npm i --save @types/yargs
     - npm ci --cache .npm --prefer-offline
     - NX_HEAD=$CI_COMMIT_SHA
