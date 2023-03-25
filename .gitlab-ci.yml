@@ -16,7 +16,6 @@ stages:
     - yarn install
     - yarn add @yarnpkg/parsers
     - npm i
-    - npm ci --cache .npm --prefer-offline
     - NX_HEAD=$CI_COMMIT_SHA
     - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
 
