@@ -1,46 +1,54 @@
-image: node:16
+image: node:18
+variables:
+  CI: 'true'
 
-stages:
-  - test
-  - build
-
-.distributed:
+# Creating template for DTE agents
+.dte-agent:
   interruptible: true
   cache:
     key:
       files:
-        - package-lock.json
+        - yarn.lock
     paths:
-      - .npm/
+      - '.yarn-cache/'
+  script:
+    - yarn install --cache-folder .yarn-cache --prefer-offline --frozen-lockfile
+    - yarn nx-cloud start-agent
+  artifacts:
+    expire_in: 5 days
+    paths:
+      - dist
+
+# Creating template for a job running DTE (orchestrator)
+.base-pipeline:
+  interruptible: true
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - '.yarn-cache/'
   before_script:
-    - npm i
-    - yarn add @yarnpkg/parsers
-    - yarn add @yarnpkg/lockfile
-    - npm ci
+    - yarn install --cache-folder .yarn-cache --prefer-offline --frozen-lockfile
+    - NX_HEAD=$CI_COMMIT_SHA
+    - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
 
-variables:
-  GIT_DEPTH: 0
-
-format-check:
-  stage: test
-  extends: .distributed
+# Main job running DTE
+nx-dte:
+  stage: affected
+  extends: .base-pipeline
   script:
-    - npx nx format:check
+    - yarn nx-cloud start-ci-run --stop-agents-after="build"
+    - yarn nx-cloud record -- yarn nx format:check --base=$NX_BASE --head=$NX_HEAD
+    - yarn nx affected --base=$NX_BASE --head=$NX_HEAD -t lint --parallel=3 & yarn nx affected --base=$NX_BASE --head=$NX_HEAD -t test --parallel=3 --configuration=ci & yarn nx affected --base=$NX_BASE --head=$NX_HEAD -t e2e --parallel=3 & yarn nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
 
-lint:
-  stage: test
-  extends: .distributed
-  script:
-    - npx nx -t lint --parallel=3
-
-test:
-  stage: test
-  extends: .distributed
-  script:
-    - npx nx -t test --parallel=3 --configuration=ci
-
-build:
-  stage: build
-  extends: .distributed
-  script:
-    - npx nx -t build --parallel=3
+# Create as many agents as you want
+nx-dte-agent1:
+  extends: .dte-agent
+  stage: affected
+nx-dte-agent2:
+  extends: .dte-agent
+  stage: affected
+nx-dte-agent3:
+  extends: .dte-agent
+  stage: affected
