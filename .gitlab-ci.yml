@@ -22,6 +22,9 @@ variables:
 # Creating template for a job running DTE (orchestrator)
 .base-pipeline:
   interruptible: true
+  only:
+    - main
+    - merge_requests
   cache:
     key:
       files:
