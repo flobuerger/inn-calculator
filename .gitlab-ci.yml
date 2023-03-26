@@ -27,7 +27,7 @@ format-check:
   stage: test
   extends: .distributed
   script:
-    - npx nx format:check --base=$NX_BASE --head=$NX_HEAD
+    - npx nx format:check --base=$NX_BASE --head=$NX_HEAD --verbose
 
 lint:
   stage: test
