@@ -2,8 +2,8 @@ image: node:16
 
 stages:
   - test
-  - build
-  - docker-build
+  - package
+
 
 .distributed:
   interruptible: true
