@@ -3,7 +3,7 @@ image: node:16
 stages:
   - test
   - build
-  - deploy
+  - docker-build
 
 .distributed:
   interruptible: true
@@ -38,9 +38,22 @@ build:
   extends: .distributed
   script:
     - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 2 hours
+  cache:
+    paths:
+      - node_modules/
 
-deploy:
-  stage: deploy
+docker-build:
+  image: docker:stable
+  stage: package
+  services:
+    - docker:dind
+  before_script:
+    - echo $CI_BUILD_TOKEN | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
-    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
-    - npm publish
+    - IMAGE_NAME="$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+    - docker build --pull -t "$IMAGE_NAME" -f Dockerfile .
+    - docker push "$IMAGE_NAME"
