@@ -3,7 +3,7 @@ image: node:16
 stages:
   - test
   - build
-  - publish
+  - deploy
 
 .distributed:
   interruptible: true
