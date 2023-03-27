@@ -8,6 +8,9 @@
     "build": "nx build",
     "test": "nx test"
   },
+  "publishConfig": {
+    "registry":"https://gitlab.company.com/api/v4/projects/44237280/packages/npm/"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~15.2.0",
