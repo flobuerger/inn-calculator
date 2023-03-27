@@ -55,6 +55,6 @@ docker-build:
   before_script:
     - echo $CI_BUILD_TOKEN | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
-    - IMAGE_NAME="$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+    - IMAGE_NAME="inn-calculator:$CI_CONCURRENT_ID"
     - docker build --pull -t "$IMAGE_NAME" -f Dockerfile .
     - docker push "$IMAGE_NAME"
