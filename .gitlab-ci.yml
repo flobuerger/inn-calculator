@@ -3,6 +3,7 @@ image: node:16
 stages:
   - test
   - build
+  - publish
 
 .distributed:
   interruptible: true
@@ -37,3 +38,9 @@ build:
   extends: .distributed
   script:
     - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
+
+deploy:
+  stage: deploy
+  script:
+    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
+    - npm publish
