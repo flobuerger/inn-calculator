@@ -3,6 +3,7 @@
     "strictPropertyInitialization": false,
     "rootDir": ".",
     "sourceMap": true,
+    "outDir": "/dist/angular-app",
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
