@@ -2,6 +2,7 @@ image: node:16
 
 stages:
   - test
+  - build
   - package
 
 
