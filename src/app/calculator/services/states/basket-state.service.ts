@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { findIndex, Observable, shareReplay, Subject } from 'rxjs';
+import { Observable, shareReplay, Subject } from 'rxjs';
 import { State } from 'src/app/services/state/state-model.service';
 import { Product } from '../../models/product';
 import { BasketState } from '../../models/basket-product.state';
