@@ -14,11 +14,12 @@ export class BillViewComponent implements OnInit, OnDestroy {
   basketProducts: BasketProduct[];
   priceAmount = 0;
   currency: string;
+  hasItems = false;
 
   constructor(
     private basketService: BasketStateService,
     private basketPriceService: BasketPriceService
-  ) {}
+  ) { }
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
@@ -26,7 +27,7 @@ export class BillViewComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.basketService.basketProducts$.subscribe((basketProducts) => {
         this.basketProducts = basketProducts.basketProducts;
-        console.log(this.basketProducts);
+        this.hasItems = this.basketProducts?.length > 0;
       })
     );
 
@@ -42,5 +43,13 @@ export class BillViewComponent implements OnInit, OnDestroy {
   checkout() {
     this.basketService.reset();
     this.basketPriceService.reset();
+  }
+
+  removeItem(basketProduct: BasketProduct) {
+    this.basketService.removeFromBasket(basketProduct.product);
+  }
+
+  getCorrectDecimal(amount: number) {
+    return (Math.round(amount * 100) / 100).toFixed(2)
   }
 }

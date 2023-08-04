@@ -1,33 +1,60 @@
-<div class="text-black divide-y-2">
+<div class="text-black">
   <div class="flex-grow">
-    <div *ngFor="let basketProduct of basketProducts">
-      <div class="flex">
+    <div *ngFor="let basketProduct of basketProducts"
+         class="text-xl">
+      <div class="flex basketProduct">
         <div class="flex-none">{{ basketProduct.count }}</div>
         <div class="flex-none mx-2">x</div>
         <div class="flex-auto w-64">
           {{ basketProduct.product.shortDescription }}
         </div>
         <div class="flex-none">
-          {{ basketProduct.product.price * basketProduct.count }}
+          {{ getCorrectDecimal( basketProduct.product.price * basketProduct.count) }}
           {{ basketProduct.product.currency }}
+        </div>
+        <div class="flex-1 p-2">
+          <button class="btn btn-error btn-sm"
+                  (click)="removeItem(basketProduct)">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 class="w-6 h-6">
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
+    <div class="text-center m-5 font-thin"
+         *ngIf="!basketProducts || basketProducts.length === 0">Keine Artikel</div>
   </div>
-  <div class="flex w-full">
+  <div class="text-black"></div>
+  <div class="flex w-full text-2xl mt-5">
     <div class="flex-grow">Summe:</div>
-    <div class="justify-end flex-none">{{ priceAmount }} {{ currency }}</div>
+    <div class="justify-center flex-none font-bold text-green-500"
+         *ngIf="priceAmount > 0">{{ getCorrectDecimal(priceAmount) }} {{ currency }}</div>
+    <div *ngIf="priceAmount === 0"
+         class="justify-center flex-none font-bold">-</div>
   </div>
-  <div>
-    <a class="btn btn-primary w-full" href="#checkout-modal">Bezahlen</a>
+  <div class="mt-2">
+    <a class="btn btn-success w-full mt-5"
+       href="#checkout-modal"
+       [ngClass]="hasItems === false ? 'btn-disabled' :'btn-success text-white' ">Bezahlen</a>
   </div>
 </div>
 
-<div class="modal" id="checkout-modal">
+<div class="modal"
+     id="checkout-modal">
   <div class="modal-box text-black">
-    <p class="py-4">Zu bezahlender Betrag: {{ priceAmount }} {{ currency }}</p>
+    <p class="py-4">Zu bezahlender Betrag: {{ getCorrectDecimal( priceAmount) }} {{ currency }}</p>
     <div class="modal-action">
-      <a (click)="checkout()" href="#" class="btn">Bezahlt</a>
+      <a (click)="checkout()"
+         href="#"
+         class="btn btn-success text-white">Abschließen</a>
     </div>
   </div>
 </div>

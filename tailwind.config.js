@@ -9,7 +9,7 @@ module.exports = {
     themes: [
       {
         ufc: {
-          primary: '#6F732F',
+          primary: '#FF0006',
           secondary: '#8D918B',
           accent: '#D7B377',
           neutral: '#DDDFDF',

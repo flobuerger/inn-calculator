@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, shareReplay, Subject } from 'rxjs';
+import { findIndex, Observable, shareReplay, Subject } from 'rxjs';
 import { State } from 'src/app/services/state/state-model.service';
 import { Product } from '../../models/product';
 import { BasketState } from '../../models/basket-product.state';
@@ -47,11 +47,22 @@ export class BasketStateService extends State<BasketState> {
   }
 
   removeFromBasket(product: Product) {
-    const newlist = this.state.basketProducts.filter(
-      (q) => q.product.id != product.id
-    );
+    const basketProductIndex = this.state.basketProducts.findIndex(q => q.product.id === product.id);
+    console.log(basketProductIndex);
+    const basketProduct = this.state.basketProducts[basketProductIndex];
+    console.log(basketProduct.count);
+    if (basketProduct.count > 1) {
+      console.log("check");
+      basketProduct.count -= 1;
+      console.log(this.state);
+      this.setState({ basketProducts: [...this.state.basketProducts] })
+    } else {
+      const newlist = this.state.basketProducts.filter(
+        (q) => q.product.id != product.id
+      );
 
-    this.setState({ basketProducts: [...newlist] });
+      this.setState({ basketProducts: [...newlist] });
+    }
   }
 
   getBasket(): BasketProduct[] {
