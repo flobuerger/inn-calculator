@@ -1,0 +1,4 @@
+.tab.tab-active:not(.tab-disabled):not([disabled]) {
+  background-color: gray;
+  color: white;
+}

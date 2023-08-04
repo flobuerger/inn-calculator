@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product, ProductType } from '../models/product';
+import { Category } from '../models/category';
 
 @Injectable({ providedIn: 'root' })
 export class ProductMockService {
@@ -45,5 +46,17 @@ export class ProductMockService {
         unit: 'ml',
       },
     ];
+  }
+
+  getCategories(): Category[] {
+    return [{
+      id: 0,
+      name: "Alkohol",
+      displayName: "Alkohol"
+    }, {
+      id: 1,
+      name: "Limo",
+      displayName: "Limo"
+    }]
   }
 }
