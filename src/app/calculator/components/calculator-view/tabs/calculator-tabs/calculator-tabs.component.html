@@ -1,0 +1,8 @@
+<div class="flex flex-row gap-3 w-full justify-start"
+     *ngIf="categories">
+    <div class="btn btn-neutral text-white rounded-t-lg rounded-b-none text-2xl font-thin h-14"
+         [ngClass]="category !== null && category === selectedTab ? 'bg-primary' : ''"
+         id="{{category.id}}"
+         (click)="changeTab($event)"
+         *ngFor="let category of categories">{{category.displayName}}</div>
+</div>

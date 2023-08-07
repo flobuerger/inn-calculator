@@ -21,7 +21,7 @@ export class BillViewComponent implements OnInit, OnDestroy {
     private basketPriceService: BasketPriceService
   ) { }
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.subscription.unsubscribe();
   }
   ngOnInit(): void {
     this.subscription.add(

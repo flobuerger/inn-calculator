@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Product, ProductType } from '../models/product';
+import { ProductType } from '../models/product';
 import { Category } from '../models/category';
 
 @Injectable({ providedIn: 'root' })
 export class ProductMockService {
-  getProducts(): Product[] {
-    return [
-      {
+  getCategories(): Category[] {
+    return [{
+      id: 0,
+      name: "Alkohol",
+      displayName: "Alkohol",
+      products: [{
         id: '0',
         createdOn: new Date('17.01.2022'),
         modifiedOn: new Date('17.01.2022'),
@@ -31,8 +34,12 @@ export class ProductMockService {
         type: ProductType.DRINK,
         amount: 500,
         unit: 'ml',
-      },
-      {
+      }]
+    }, {
+      id: 1,
+      name: "Limo",
+      displayName: "Limo",
+      products: [{
         id: '2',
         createdOn: new Date('10.01.2022'),
         modifiedOn: new Date('30.01.2022'),
@@ -45,18 +52,74 @@ export class ProductMockService {
         amount: 250,
         unit: 'ml',
       },
-    ];
-  }
-
-  getCategories(): Category[] {
-    return [{
-      id: 0,
-      name: "Alkohol",
-      displayName: "Alkohol"
-    }, {
-      id: 1,
-      name: "Limo",
-      displayName: "Limo"
-    }]
+      {
+        id: '3',
+        createdOn: new Date('10.01.2022'),
+        modifiedOn: new Date('30.01.2022'),
+        name: 'Almdudler Leitung',
+        price: 3.80,
+        shortDescription: 'Almdudler',
+        sortOrder: 3,
+        currency: '€',
+        type: ProductType.DRINK,
+        amount: 250,
+        unit: 'ml',
+      }],
+    },
+    {
+      id: 2,
+      name: "Essen",
+      displayName: "Essen",
+      products: [{
+        id: '4',
+        createdOn: new Date('10.01.2022'),
+        modifiedOn: new Date('30.01.2022'),
+        name: 'Leberkäsesemmel',
+        price: 2.50,
+        shortDescription: 'Leberkäsesemmel',
+        sortOrder: 4,
+        currency: '€',
+        type: ProductType.FOOD,
+        amount: 250,
+        unit: 'ml',
+      }, {
+        id: '5',
+        createdOn: new Date('10.01.2022'),
+        modifiedOn: new Date('30.01.2022'),
+        name: 'Käse-Leberkäsesemmel',
+        price: 2.70,
+        shortDescription: 'Käse-Leberkäsesemmel',
+        sortOrder: 4,
+        currency: '€',
+        type: ProductType.FOOD,
+        amount: 250,
+        unit: 'ml',
+      }, {
+        id: '6',
+        createdOn: new Date('10.01.2022'),
+        modifiedOn: new Date('30.01.2022'),
+        name: 'Gummischlange',
+        price: 1.00,
+        shortDescription: 'Gummischlange',
+        sortOrder: 4,
+        currency: '€',
+        type: ProductType.FOOD,
+        amount: 250,
+        unit: 'ml',
+      }, {
+        id: '7',
+        createdOn: new Date('10.01.2022'),
+        modifiedOn: new Date('30.01.2022'),
+        name: 'Schlecker div.',
+        price: 1.50,
+        shortDescription: 'Schlecker',
+        sortOrder: 4,
+        currency: '€',
+        type: ProductType.FOOD,
+        amount: 250,
+        unit: 'ml',
+      }]
+    }
+    ]
   }
 }

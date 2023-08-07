@@ -7,7 +7,9 @@ import { appRoutes } from './app.routes';
 import { CalculatorModule } from './calculator/calculator.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     CalculatorModule,
@@ -16,4 +18,4 @@ import { CalculatorModule } from './calculator/calculator.module';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

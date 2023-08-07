@@ -2,6 +2,7 @@
   "name": "inn-calculator",
   "version": "0.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "debug:inn-calculator": "nx serve",
     "start": "nx serve",
@@ -11,7 +12,6 @@
   "publishConfig": {
     "registry": "https://gitlab.company.com/api/v4/projects/44237280/packages/npm/"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "16.1.8",
     "@angular/common": "16.1.8",

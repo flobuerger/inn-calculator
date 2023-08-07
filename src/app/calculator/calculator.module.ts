@@ -7,6 +7,7 @@ import { CalculatorViewComponent } from './components/calculator-view/calculator
 import { BillViewComponent } from './components/bill-view/bill-view.component';
 import { ProductResolver } from './resolvers/product.resolver';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { CalculatorTabsComponent } from './components/calculator-view/tabs/calculator-tabs/calculator-tabs.component';
 
 export const APP_ROUTES: Routes = [
   {
@@ -22,10 +23,11 @@ export const APP_ROUTES: Routes = [
     CalculatorViewComponent,
     BillViewComponent,
     ProductCardComponent,
+    CalculatorTabsComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forRoot(APP_ROUTES, { paramsInheritanceStrategy: 'always' }),
   ],
 })
-export class CalculatorModule {}
+export class CalculatorModule { }
