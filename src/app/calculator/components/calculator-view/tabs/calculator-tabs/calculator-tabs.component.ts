@@ -1,7 +1,8 @@
 import { Component, Input, OnDestroy } from '@angular/core';
-import { Category } from 'src/app/calculator/models/category';
-import { CategoryService } from '../services/calculator-tabs.service';
+import { Category } from 'src/app/calculator/models/category.model';
 import { Subscription } from 'rxjs';
+import { ProductCheckoutService } from 'src/app/calculator/services/states/product-checkout.service';
+import { CategoryService } from '../../../../services/category.service';
 
 @Component({
   selector: 'inn-calculator-tabs',
@@ -18,7 +19,7 @@ export class CalculatorTabsComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  constructor(private calculatorTabService: CategoryService) {
+  constructor(private calculatorTabService: CategoryService, private productCheckoutService: ProductCheckoutService) {
     this.subscription.add(
       this.calculatorTabService.selectedCategory$.subscribe((selectedCategory) => {
         this.selectedTab = selectedCategory

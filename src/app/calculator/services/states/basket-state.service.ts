@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, shareReplay, Subject } from 'rxjs';
 import { State } from 'src/app/services/state/state-model.service';
-import { Product } from '../../models/product';
-import { BasketState } from '../../models/basket-product.state';
-import { BasketProduct } from '../../models/basket-product';
+import { BasketProduct } from '../../models/basket-product.model';
+import { BasketState } from '../../models/states/basket-product.state';
+import { Product } from '../../models/product.model';
 
 @Injectable({
   providedIn: 'root',

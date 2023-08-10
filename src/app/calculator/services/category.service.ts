@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { Category } from "src/app/calculator/models/category";
-import { Product } from "src/app/calculator/models/product";
+import { Category } from "src/app/calculator/models/category.model";
+import { Product } from "src/app/calculator/models/product.model";
 
 @Injectable({
     providedIn: 'root'
@@ -19,5 +19,9 @@ export class CategoryService {
     setSelectedCategory(category: Category) {
         this.#selectedCategory.next(category);
         this.#products.next(category.products);
+    }
+
+    getProducts() {
+        return this.products$;
     }
 }

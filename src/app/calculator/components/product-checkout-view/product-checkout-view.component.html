@@ -1,0 +1,24 @@
+<div class="flex flex-col w-full h-full">
+    <div class="flex flex-row gap-5 mt-5 flex-wrap">
+        <div *ngFor="let unit of product.units"
+             class="text-black">
+            <div class="card bg-secondary product_card cursor-pointer "
+                 (click)="addProduct(unit.sort)">
+                <div class="badge">{{getBasketCount(unit.sort)}}</div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <div class="flex-col align-middle justify-center w-full min-w-fit">
+                            <div class="text-center">
+                                <div class="grow">{{unit.amount}} {{getUnitEnum( unit.unit)}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="w-full flex justify-end">
+        <div class="btn">Hinzufügen</div>
+    </div>
+</div>

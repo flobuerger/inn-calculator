@@ -9,8 +9,8 @@
           {{ basketProduct.product.shortDescription }}
         </div>
         <div class="flex-none">
-          {{ getCorrectDecimal( basketProduct.product.price * basketProduct.count) }}
-          {{ basketProduct.product.currency }}
+          {{ getCorrectDecimal( basketProduct.product.price.amount * basketProduct.count) }}
+          {{ basketProduct.product.price.currency.currencyCode }}
         </div>
         <div class="flex-1 p-2">
           <button class="btn btn-error btn-sm"
@@ -36,7 +36,7 @@
   <div class="flex w-full text-2xl mt-5">
     <div class="flex-grow">Summe:</div>
     <div class="justify-center flex-none font-bold text-green-500"
-         *ngIf="priceAmount > 0">{{ getCorrectDecimal(priceAmount) }} {{ currency }}</div>
+         *ngIf="priceAmount > 0">{{ getCorrectDecimal(priceAmount) }} {{ currency.currencyCode }}</div>
     <div *ngIf="priceAmount === 0"
          class="justify-center flex-none font-bold">-</div>
   </div>
@@ -50,7 +50,7 @@
 <div class="modal"
      id="checkout-modal">
   <div class="modal-box text-black">
-    <p class="py-4">Zu bezahlender Betrag: {{ getCorrectDecimal( priceAmount) }} {{ currency }}</p>
+    <p class="py-4">Zu bezahlender Betrag: {{ getCorrectDecimal( priceAmount) }} {{ currency.currencyCode }}</p>
     <div class="modal-action">
       <a (click)="checkout()"
          href="#"

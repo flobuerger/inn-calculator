@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductMockService } from './calculator/services/product-mock.service';
-import { CategoryService } from './calculator/components/calculator-view/tabs/services/calculator-tabs.service';
+import { CategoryService } from './calculator/services/category.service';
 
 @Component({
   selector: 'inn-calculator-root',
@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = 'inn-calculator';
   constructor(
     private mockService: ProductMockService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
   ) { }
   ngOnInit(): void {
     const mocks = this.mockService.getCategories();

@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BasketProduct } from '../../models/basket-product';
+import { BasketProduct } from '../../models/basket-product.model';
 import { BasketPriceService } from '../../services/states/basket-price.service';
 import { BasketStateService } from '../../services/states/basket-state.service';
+import { Currency } from '../../models/currency.model';
 
 @Component({
   selector: 'inn-calculator-bill-view',
@@ -13,7 +14,7 @@ export class BillViewComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   basketProducts: BasketProduct[];
   priceAmount = 0;
-  currency: string;
+  currency: Currency;
   hasItems = false;
 
   constructor(

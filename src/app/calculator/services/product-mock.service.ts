@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ProductType } from '../models/product';
-import { Category } from '../models/category';
+import { Category } from '../models/category.model';
+import { ProductTypeEnum } from '../models/enums/productType.enum';
+import { UnitEnum } from '../models/enums/unit.enum';
 
 @Injectable({ providedIn: 'root' })
 export class ProductMockService {
@@ -9,115 +10,210 @@ export class ProductMockService {
       id: 0,
       name: "Alkohol",
       displayName: "Alkohol",
+      createdOn: new Date(),
+      modifiedOn: new Date(),
       products: [{
-        id: '0',
+        id: 0,
         createdOn: new Date('17.01.2022'),
         modifiedOn: new Date('17.01.2022'),
         name: 'Baumgartner Märzen',
-        price: 5.1,
+        price: {
+          amount: 5.10,
+          currency: {
+            id: 0,
+            name: "Euro",
+            displayName: "Euro",
+            currencyCode: "EUR"
+          }
+        },
         shortDescription: 'Bier',
         sortOrder: 1,
-        currency: '€',
-        type: ProductType.DRINK,
-        amount: 500,
-        unit: 'ml',
+        productType: ProductTypeEnum.DRINK,
+        units: [{
+          sort: 0,
+          amount: 250,
+          unit: UnitEnum.ml
+        }, {
+          sort: 1,
+          amount: 500,
+          unit: UnitEnum.ml
+        }]
       },
       {
-        id: '1',
+        id: 1,
         createdOn: new Date('22.01.2022'),
         modifiedOn: new Date('25.01.2022'),
         name: 'Spritzer Weiß',
-        price: 4.5,
+        price: {
+          amount: 4.5,
+          currency: {
+            id: 0,
+            name: "Euro",
+            displayName: "Euro",
+            currencyCode: "EUR"
+          },
+        },
         shortDescription: 'Wein',
         sortOrder: 2,
-        currency: '€',
-        type: ProductType.DRINK,
-        amount: 500,
-        unit: 'ml',
-      }]
-    }, {
-      id: 1,
-      name: "Limo",
-      displayName: "Limo",
-      products: [{
-        id: '2',
+        productType: ProductTypeEnum.DRINK,
+        units: [{
+          sort: 0,
+          amount: 250,
+          unit: UnitEnum.ml
+        }, {
+          sort: 1,
+          amount: 500,
+          unit: UnitEnum.ml
+        }]
+      }, {
+        id: 2,
         createdOn: new Date('10.01.2022'),
         modifiedOn: new Date('30.01.2022'),
         name: 'Cola Zero',
-        price: 5.1,
+        price: {
+          amount: 5.10,
+          currency: {
+            id: 0,
+            name: "Euro",
+            displayName: "Euro",
+            currencyCode: "EUR"
+          },
+        },
         shortDescription: 'Cola',
         sortOrder: 3,
-        currency: '€',
-        type: ProductType.DRINK,
-        amount: 250,
-        unit: 'ml',
+        productType: ProductTypeEnum.DRINK,
+        units: [{
+          sort: 0,
+          amount: 250,
+          unit: UnitEnum.ml
+        }, {
+          sort: 1,
+          amount: 500,
+          unit: UnitEnum.ml
+        }]
       },
       {
-        id: '3',
+        id: 3,
         createdOn: new Date('10.01.2022'),
         modifiedOn: new Date('30.01.2022'),
         name: 'Almdudler Leitung',
-        price: 3.80,
+        price: {
+          amount: 3.70,
+          currency: {
+            id: 0,
+            name: "Euro",
+            displayName: "Euro",
+            currencyCode: "EUR"
+          },
+        },
         shortDescription: 'Almdudler',
         sortOrder: 3,
-        currency: '€',
-        type: ProductType.DRINK,
-        amount: 250,
-        unit: 'ml',
+        productType: ProductTypeEnum.DRINK,
+        units: [{
+          sort: 0,
+          amount: 250,
+          unit: UnitEnum.ml
+        }, {
+          sort: 1,
+          amount: 500,
+          unit: UnitEnum.ml
+        }]
       }],
     },
     {
-      id: 2,
+      id: 1,
       name: "Essen",
       displayName: "Essen",
+      createdOn: new Date('17.01.2022'),
+      modifiedOn: new Date('17.01.2022'),
       products: [{
-        id: '4',
+        id: 0,
         createdOn: new Date('10.01.2022'),
         modifiedOn: new Date('30.01.2022'),
         name: 'Leberkäsesemmel',
-        price: 2.50,
+        price: {
+          amount: 2.70,
+          currency: {
+            id: 0,
+            name: "Euro",
+            displayName: "Euro",
+            currencyCode: "EUR"
+          },
+        },
         shortDescription: 'Leberkäsesemmel',
         sortOrder: 4,
-        currency: '€',
-        type: ProductType.FOOD,
-        amount: 250,
-        unit: 'ml',
+        productType: ProductTypeEnum.FOOD,
+        units: [{
+          sort: 0,
+          amount: 1,
+          unit: UnitEnum['#']
+        }]
       }, {
-        id: '5',
+        id: 2,
         createdOn: new Date('10.01.2022'),
         modifiedOn: new Date('30.01.2022'),
         name: 'Käse-Leberkäsesemmel',
-        price: 2.70,
+        price: {
+          amount: 2.90,
+          currency: {
+            id: 0,
+            name: "Euro",
+            displayName: "Euro",
+            currencyCode: "EUR"
+          },
+        },
         shortDescription: 'Käse-Leberkäsesemmel',
         sortOrder: 4,
-        currency: '€',
-        type: ProductType.FOOD,
-        amount: 250,
-        unit: 'ml',
+        productType: ProductTypeEnum.FOOD,
+        units: [{
+          sort: 0,
+          amount: 1,
+          unit: UnitEnum['#']
+        }]
       }, {
-        id: '6',
+        id: 3,
         createdOn: new Date('10.01.2022'),
         modifiedOn: new Date('30.01.2022'),
         name: 'Gummischlange',
-        price: 1.00,
+        price: {
+          amount: 1.10,
+          currency: {
+            id: 0,
+            name: "Euro",
+            displayName: "Euro",
+            currencyCode: "EUR"
+          },
+        },
         shortDescription: 'Gummischlange',
         sortOrder: 4,
-        currency: '€',
-        type: ProductType.FOOD,
-        amount: 250,
-        unit: 'ml',
+        productType: ProductTypeEnum.FOOD,
+        units: [{
+          sort: 0,
+          amount: 1,
+          unit: UnitEnum['#']
+        }]
       }, {
-        id: '7',
+        id: 4,
         createdOn: new Date('10.01.2022'),
         modifiedOn: new Date('30.01.2022'),
         name: 'Schlecker div.',
-        price: 1.50,
+        price: {
+          amount: 1.50,
+          currency: {
+            id: 0,
+            name: "Euro",
+            displayName: "Euro",
+            currencyCode: "EUR"
+          },
+        },
         shortDescription: 'Schlecker',
         sortOrder: 4,
-        currency: '€',
-        type: ProductType.FOOD,
-        amount: 250,
-        unit: 'ml',
+        productType: ProductTypeEnum.FOOD,
+        units: [{
+          sort: 0,
+          amount: 1,
+          unit: UnitEnum['#']
+        }]
       }]
     }
     ]

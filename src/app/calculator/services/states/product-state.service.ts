@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { State } from 'src/app/services/state/state-model.service';
-import { Product } from '../../models/product';
-import { ProductStates } from '../../models/product.state';
 import { ProductMockService } from '../product-mock.service';
+import { ProductStates } from '../../models/states/product.state';
+import { Product } from '../../models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,7 @@ export class ProductStateService extends State<ProductStates> {
     this.setState({ products: [...this.state.products, product] });
   }
 
-  getProduct(id: string): Product {
+  getProduct(id: number): Product {
     return this.state.products.filter((product) => product.id == id)[0];
   }
 
