@@ -13,13 +13,13 @@ export class BasketPriceService extends State<BasketPriceState> {
   );
 
   constructor() {
-    super({ priceAmount: 0, currency: { currencyCode: "EUR", id: 0, name: "Euro", displayName: "Euro" } });
+    super({ priceAmount: 0, currencyCode: "EUR" });
   }
 
-  add(price: number, currency: Currency = { currencyCode: "EUR", id: 0, name: "Euro", displayName: "Euro" }) {
+  add(price: number, currencyCode: string) {
     this.setState({
       priceAmount: this.state.priceAmount + price,
-      currency: currency,
+      currencyCode: currencyCode,
     });
   }
 

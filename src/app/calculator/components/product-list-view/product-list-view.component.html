@@ -1,13 +1,17 @@
 <div class="flex flex-col w-full h-full">
   <div class="flex flex-row gap-5 mt-5 flex-wrap">
-    <div *ngFor="let product of productList">
+    <div *ngFor="let product of products">
       <div class="card bg-secondary product_card cursor-pointer "
-           (click)="goToType(product)">
+           (click)="addToBasket(product)">
+        <div class="badge card_badge">{{getBasketCount(product.id)}}</div>
         <div class="card-body">
           <div class="card-title">
             <div class="flex-col align-middle justify-center w-full min-w-fit">
               <div class="text-center">
-                <div class="grow">{{ product.shortDescription }}</div>
+                <div class="grow">
+                  <div>{{ product.shortDescription }}</div>
+                  <div>{{product.unitAmount}} {{getUnitEnumText(product.unit) }} </div>
+                </div>
               </div>
             </div>
           </div>

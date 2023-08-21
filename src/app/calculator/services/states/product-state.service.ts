@@ -13,7 +13,7 @@ export class ProductStateService extends State<ProductStates> {
     (state) => state.products
   ).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 
-  constructor(private mockService: ProductMockService) {
+  constructor() {
     super({
       products: [],
     });
@@ -32,6 +32,13 @@ export class ProductStateService extends State<ProductStates> {
   }
 
   getProducts(): Product[] {
-    return this.state.products;
+    return this.state.products.sort((a: Product, b: Product) => a.sortOrder - b.sortOrder);
+  }
+
+  getProductsByCategory(categoryId: number) {
+    console.log(categoryId);
+    console.log(this.state.products);
+    console.log(this.state.products.filter(q => q.categoryId == categoryId))
+    return this.state.products.filter(q => q.categoryId == categoryId).sort((a: Product, b: Product) => a.sortOrder - b.sortOrder);
   }
 }

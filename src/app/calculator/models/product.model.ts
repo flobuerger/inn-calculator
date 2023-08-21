@@ -1,6 +1,5 @@
-import { Price } from "./price.model";
 import { ProductTypeEnum } from "./enums/productType.enum";
-import { Unit } from "./unit.model";
+import { UnitEnum } from "./enums/unit.enum";
 
 export interface Product {
   id: number;
@@ -10,6 +9,9 @@ export interface Product {
   modifiedOn: Date;
   sortOrder: number;
   productType: ProductTypeEnum;
-  units: Unit[];
-  price: Price;
+  unit: UnitEnum;
+  unitAmount: number;
+  priceAmount: number;
+  currencyCode: string;
+  categoryId: number;
 }

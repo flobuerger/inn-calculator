@@ -6,5 +6,4 @@ export interface Category {
     displayName: string;
     createdOn: Date;
     modifiedOn: Date;
-    products: Product[];
 }

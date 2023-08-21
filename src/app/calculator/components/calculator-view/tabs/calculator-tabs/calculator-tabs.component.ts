@@ -1,17 +1,16 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category } from 'src/app/calculator/models/category.model';
 import { Subscription } from 'rxjs';
-import { ProductCheckoutService } from 'src/app/calculator/services/states/product-checkout.service';
-import { CategoryService } from '../../../../services/category.service';
+import { CategoryStateService } from 'src/app/calculator/services/states/category-state.service';
 
 @Component({
   selector: 'inn-calculator-tabs',
   templateUrl: './calculator-tabs.component.html',
   styleUrls: ['./calculator-tabs.component.css'],
 })
-export class CalculatorTabsComponent implements OnDestroy {
-  @Input() categories: Category[];
-  selectedTab: Category;
+export class CalculatorTabsComponent implements OnInit, OnDestroy {
+  categories: Category[];
+  selectedCategoryId: number;
 
   subscription = new Subscription();
 
@@ -19,18 +18,26 @@ export class CalculatorTabsComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  constructor(private calculatorTabService: CategoryService, private productCheckoutService: ProductCheckoutService) {
+  constructor(private categoryStateService: CategoryStateService) {
+
+  }
+
+  ngOnInit(): void {
     this.subscription.add(
-      this.calculatorTabService.selectedCategory$.subscribe((selectedCategory) => {
-        this.selectedTab = selectedCategory
+      this.categoryStateService.selectedCategoryTabId$.subscribe((selectedCategoryId: number) => {
+        this.selectedCategoryId = selectedCategoryId
       })
+    )
+
+    this.subscription.add(
+      this.categoryStateService.categories$.subscribe((categories) => { this.categories = categories; console.log("set categories") })
     )
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   changeTab(event: any) {
-    const category = this.categories.find(q => q.id == event.target.id);
-    if (category)
-      this.calculatorTabService.setSelectedCategory(category);
+    if (event) {
+      this.categoryStateService.setSelectedCategoryTabId(event.target.id as number);
+    }
   }
 }

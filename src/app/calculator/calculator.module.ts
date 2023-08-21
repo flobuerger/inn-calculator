@@ -1,4 +1,4 @@
-import { NgModule, inject } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductListViewComponent } from './components/product-list-view/product-list-view.component';
 
@@ -6,15 +6,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { CalculatorViewComponent } from './components/calculator-view/calculator-view.component';
 import { BillViewComponent } from './components/bill-view/bill-view.component';
 import { CalculatorTabsComponent } from './components/calculator-view/tabs/calculator-tabs/calculator-tabs.component';
-import { ProductCheckoutViewComponent } from './components/product-checkout-view/product-checkout-view.component';
-import { ProductCheckoutDirective } from './directives/product-checkout.directive';
-import { ProductResolver } from './resolvers/product.resolver';
 
 export const APP_ROUTES: Routes = [
   {
     path: '',
-    component: CalculatorViewComponent, resolve: { product: () => inject(ProductResolver).resolve() },
-
+    component: CalculatorViewComponent
   }
 ];
 
@@ -24,8 +20,6 @@ export const APP_ROUTES: Routes = [
     CalculatorViewComponent,
     BillViewComponent,
     CalculatorTabsComponent,
-    ProductCheckoutViewComponent,
-    ProductCheckoutDirective
   ],
   exports: [],
   imports: [

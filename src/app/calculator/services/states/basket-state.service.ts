@@ -9,7 +9,7 @@ import { Product } from '../../models/product.model';
   providedIn: 'root',
 })
 export class BasketStateService extends State<BasketState> {
-  basketProducts$: Observable<BasketState> = this.select((state) => state).pipe(
+  basketProducts$: Observable<BasketProduct[]> = this.select((state) => state.basketProducts).pipe(
     shareReplay({ refCount: true, bufferSize: 1 })
   );
   priceAmount = new Subject<number>();
@@ -25,23 +25,25 @@ export class BasketStateService extends State<BasketState> {
     console.log('add product to basket: ' + product.name);
 
     const basketProductPos = this.state.basketProducts.findIndex(
-      (q) => q.product.id == product.id
+      (q) => q.product.id == product.id && q.amount === product.priceAmount
     );
 
     console.log('current basketPros: ' + basketProductPos);
 
     if (basketProductPos > -1) {
       const item = this.state.basketProducts[basketProductPos];
-      item.count++;
+      item.count += 1;
 
       this.setState({ basketProducts: [...this.state.basketProducts] });
     } else {
-      const basketProduct: BasketProduct = {
+      const newBasketProduct: BasketProduct = {
         product: product,
         count: 1,
+        unit: product.unit,
+        amount: product.unitAmount
       };
       this.setState({
-        basketProducts: [...this.state.basketProducts, basketProduct],
+        basketProducts: [...this.state.basketProducts, newBasketProduct],
       });
     }
   }

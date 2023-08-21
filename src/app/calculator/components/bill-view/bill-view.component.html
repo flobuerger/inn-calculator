@@ -3,16 +3,19 @@
     <div *ngFor="let basketProduct of basketProducts"
          class="text-xl">
       <div class="flex basketProduct">
-        <div class="flex-none">{{ basketProduct.count }}</div>
-        <div class="flex-none mx-2">x</div>
-        <div class="flex-auto w-64">
-          {{ basketProduct.product.shortDescription }}
+        <div class="flex flex-row flex-grow">
+          <div class="flex-none">{{ basketProduct.count }}</div>
+          <div class="flex-none mx-2">x</div>
+          <div class="flex-none">
+            {{ basketProduct.product.shortDescription }}
+          </div>
+          <div class="flex-none"> ({{basketProduct.amount}} {{getUnitEnum(basketProduct.unit)}})</div>
         </div>
         <div class="flex-none">
-          {{ getCorrectDecimal( basketProduct.product.price.amount * basketProduct.count) }}
-          {{ basketProduct.product.price.currency.currencyCode }}
+          {{ getCorrectDecimal( basketProduct.product.unitAmount * basketProduct.count) }}
+          {{ basketProduct.product.currencyCode }}
         </div>
-        <div class="flex-1 p-2">
+        <div class="flex-none p-2">
           <button class="btn btn-error btn-sm"
                   (click)="removeItem(basketProduct)">
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +39,7 @@
   <div class="flex w-full text-2xl mt-5">
     <div class="flex-grow">Summe:</div>
     <div class="justify-center flex-none font-bold text-green-500"
-         *ngIf="priceAmount > 0">{{ getCorrectDecimal(priceAmount) }} {{ currency.currencyCode }}</div>
+         *ngIf="priceAmount > 0">{{ getCorrectDecimal(priceAmount) }} {{ currencyCode }}</div>
     <div *ngIf="priceAmount === 0"
          class="justify-center flex-none font-bold">-</div>
   </div>
@@ -50,7 +53,7 @@
 <div class="modal"
      id="checkout-modal">
   <div class="modal-box text-black">
-    <p class="py-4">Zu bezahlender Betrag: {{ getCorrectDecimal( priceAmount) }} {{ currency.currencyCode }}</p>
+    <p class="py-4">Zu bezahlender Betrag: {{ getCorrectDecimal( priceAmount) }} {{ currencyCode }}</p>
     <div class="modal-action">
       <a (click)="checkout()"
          href="#"

@@ -1,47 +1,63 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription, } from 'rxjs';
 import { Product } from '../../models/product.model';
 import { BasketStateService } from '../../services/states/basket-state.service';
 import { BasketPriceService } from '../../services/states/basket-price.service';
-import { ProductCheckoutService } from '../../services/states/product-checkout.service';
-import { DynamicComponent } from '../dynamic-component';
-import { CategoryService } from '../../services/category.service';
+import { UnitEnum } from '../../models/enums/unit.enum';
+import { CategoryStateService } from '../../services/states/category-state.service';
+import { ProductStateService } from '../../services/states/product-state.service';
+import { BasketProduct } from '../../models/basket-product.model';
 
 @Component({
   selector: 'inn-calculator-product-list-view',
   templateUrl: './product-list-view.component.html',
   styleUrls: ['./product-list-view.component.scss'],
 })
-export class ProductListViewComponent implements OnInit, OnDestroy, DynamicComponent {
-  @Input() product: Product;
-
+export class ProductListViewComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
-  products!: Observable<Product[]>;
-  productList: Product[];
+  products: Product[];
   selectedProduct!: Product;
 
-  constructor(private categoryService: CategoryService,
+  basket: BasketProduct[] = [];
+
+  constructor(private categoryService: CategoryStateService,
     private basketService: BasketStateService,
     private basketPriceService: BasketPriceService,
-    private productCheckoutService: ProductCheckoutService) { }
+    private productService: ProductStateService) { }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
   ngOnInit(): void {
-    this.categoryService.getProducts().subscribe((products) => {
-      this.productList = products;
-    });
-    console.log("init");
+    this.subscription.add(
+      this.basketService.basketProducts$.subscribe((basketItems) => this.basket = basketItems)
+    );
+
+    this.subscription.add(
+      this.categoryService.selectedCategoryTabId$.subscribe((selectedCategoryId) => {
+        console.log(selectedCategoryId);
+        this.products = this.productService.getProductsByCategory(selectedCategoryId);
+        console.log(this.products);
+      })
+    );
   }
 
-  addToBasket(product: Product): void {
+  getUnitEnumText(unit: UnitEnum) {
+    return UnitEnum[unit];
+  }
+
+  addToBasket(product: Product) {
     this.basketService.addToBasket(product);
-    this.basketPriceService.add(product.price.amount, product.price.currency);
+    this.basketPriceService.add(product.priceAmount, product.currencyCode);
   }
 
-  goToType(product: Product) {
-    this.productCheckoutService.setSelectedProduct(product);
+  getBasketCount(id: number) {
+    if (this.basket) {
+      const basketIndex = this.basket.findIndex(q => q.product != null && q.product.id == id);
+      if (basketIndex > -1)
+        return this.basket[basketIndex].count;
+    }
+    return 0;
   }
 
 }
