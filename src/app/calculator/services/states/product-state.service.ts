@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { State } from 'src/app/services/state/state-model.service';
-import { ProductMockService } from '../product-mock.service';
 import { ProductStates } from '../../models/states/product.state';
 import { Product } from '../../models/product.model';
 
@@ -36,9 +35,10 @@ export class ProductStateService extends State<ProductStates> {
   }
 
   getProductsByCategory(categoryId: number) {
-    console.log(categoryId);
-    console.log(this.state.products);
-    console.log(this.state.products.filter(q => q.categoryId == categoryId))
     return this.state.products.filter(q => q.categoryId == categoryId).sort((a: Product, b: Product) => a.sortOrder - b.sortOrder);
+  }
+
+  getProductsByCategoryAndProductArea(categoryId: number, productAreaId: number) {
+    return this.state.products.filter(q => q.categoryId == categoryId && q.productAreaId == productAreaId).sort((a: Product, b: Product) => a.sortOrder - b.sortOrder);
   }
 }

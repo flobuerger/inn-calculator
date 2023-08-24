@@ -1,3 +1,4 @@
+import { ProductAreaTypeEnum } from "./enums/product-area-type.enum";
 import { ProductTypeEnum } from "./enums/productType.enum";
 import { UnitEnum } from "./enums/unit.enum";
 
@@ -9,9 +10,12 @@ export interface Product {
   modifiedOn: Date;
   sortOrder: number;
   productType: ProductTypeEnum;
+  productAreaId?: number;
   unit: UnitEnum;
   unitAmount: number;
   priceAmount: number;
   currencyCode: string;
   categoryId: number;
+  subType?: string;
+  hasPawn: boolean;
 }

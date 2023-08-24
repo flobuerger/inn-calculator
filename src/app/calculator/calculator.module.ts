@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CalculatorViewComponent } from './components/calculator-view/calculator-view.component';
 import { BillViewComponent } from './components/bill-view/bill-view.component';
 import { CalculatorTabsComponent } from './components/calculator-view/tabs/calculator-tabs/calculator-tabs.component';
+import { ProductListAreaComponent } from './components/product-list-area/product-list-area.component';
 
 export const APP_ROUTES: Routes = [
   {
@@ -20,6 +21,7 @@ export const APP_ROUTES: Routes = [
     CalculatorViewComponent,
     BillViewComponent,
     CalculatorTabsComponent,
+    ProductListAreaComponent
   ],
   exports: [],
   imports: [

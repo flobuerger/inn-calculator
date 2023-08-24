@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductMockService } from './calculator/services/product-mock.service';
+import { Component, OnInit, inject } from '@angular/core';
 import { CategoryStateService } from './calculator/services/states/category-state.service';
 import { ProductStateService } from './calculator';
+import { ProductService } from './calculator/services/product.service';
+import { CategoryService } from './calculator/services/category.service';
+import { ProductAreaService } from './calculator/services/product-area.service';
+import { ProductAreaStateService } from './calculator/services/states/product-area-state.service';
 
 @Component({
   selector: 'inn-calculator-root',
@@ -9,20 +12,26 @@ import { ProductStateService } from './calculator';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private mockService: ProductMockService, private categoryService: CategoryStateService,
-    private productService: ProductStateService) { }
+  productAreaService = inject(ProductAreaService);
+  productAreaStateService = inject(ProductAreaStateService);
+
+  constructor(private categoryService: CategoryService, private categoryStateService: CategoryStateService,
+    private productStateService: ProductStateService,
+    private productService: ProductService) { }
 
   ngOnInit(): void {
-    const allCategories = this.mockService.getCategories();
-    const allProducts = this.mockService.getProducts();
+    this.categoryService.getCategories().subscribe((catgeories) => {
+      this.categoryStateService.setCategories(catgeories);
+      this.categoryStateService.setSelectedCategoryTabId(0);
+    })
+    this.productService.getProducts().subscribe((products) => {
+      this.productStateService.setProducts(products);
+    });
 
-    console.log("allCategories");
-    console.log(allCategories);
-    console.log("allProducts");
-    console.log(allProducts);
+    this.productAreaService.getProductAreas().subscribe((productAreas) => {
+      this.productAreaStateService.setProductAreas(productAreas);
+    })
 
-    this.categoryService.setCategories(allCategories);
-    this.productService.setProducts(allProducts);
   }
   title = 'inn-calculator';
 }

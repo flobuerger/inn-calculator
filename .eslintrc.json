@@ -23,7 +23,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "inn-calculator",
+            "prefix": "",
             "style": "kebab-case"
           }
         ]

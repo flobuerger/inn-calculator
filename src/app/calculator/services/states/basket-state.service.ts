@@ -22,13 +22,10 @@ export class BasketStateService extends State<BasketState> {
   }
 
   addToBasket(product: Product) {
-    console.log('add product to basket: ' + product.name);
 
     const basketProductPos = this.state.basketProducts.findIndex(
       (q) => q.product.id == product.id && q.amount === product.priceAmount
     );
-
-    console.log('current basketPros: ' + basketProductPos);
 
     if (basketProductPos > -1) {
       const item = this.state.basketProducts[basketProductPos];
@@ -40,7 +37,7 @@ export class BasketStateService extends State<BasketState> {
         product: product,
         count: 1,
         unit: product.unit,
-        amount: product.unitAmount
+        amount: product.priceAmount
       };
       this.setState({
         basketProducts: [...this.state.basketProducts, newBasketProduct],
@@ -50,13 +47,9 @@ export class BasketStateService extends State<BasketState> {
 
   removeFromBasket(product: Product) {
     const basketProductIndex = this.state.basketProducts.findIndex(q => q.product.id === product.id);
-    console.log(basketProductIndex);
     const basketProduct = this.state.basketProducts[basketProductIndex];
-    console.log(basketProduct.count);
     if (basketProduct.count > 1) {
-      console.log("check");
       basketProduct.count -= 1;
-      console.log(this.state);
       this.setState({ basketProducts: [...this.state.basketProducts] })
     } else {
       const newlist = this.state.basketProducts.filter(

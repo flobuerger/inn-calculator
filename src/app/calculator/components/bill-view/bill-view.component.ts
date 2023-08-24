@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BasketProduct } from '../../models/basket-product.model';
-import { BasketPriceService } from '../../services/states/basket-price.service';
+import { BasketPriceService } from '../../services/basket-bill-price.service';
 import { BasketStateService } from '../../services/states/basket-state.service';
 import { UnitEnum } from '../../models/enums/unit.enum';
+import { BasketService } from '../../services/basket.service';
 
 @Component({
   selector: 'inn-calculator-bill-view',
@@ -11,6 +12,8 @@ import { UnitEnum } from '../../models/enums/unit.enum';
   styleUrls: ['./bill-view.component.scss'],
 })
 export class BillViewComponent implements OnInit, OnDestroy {
+  basketService = inject(BasketService);
+
   subscription = new Subscription();
   basketProducts: BasketProduct[];
   priceAmount = 0;
@@ -18,7 +21,7 @@ export class BillViewComponent implements OnInit, OnDestroy {
   hasItems = false;
 
   constructor(
-    private basketService: BasketStateService,
+    private basketStateService: BasketStateService,
     private basketPriceService: BasketPriceService
   ) { }
   ngOnDestroy(): void {
@@ -26,7 +29,7 @@ export class BillViewComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.subscription.add(
-      this.basketService.basketProducts$.subscribe((basketProducts) => {
+      this.basketStateService.basketProducts$.subscribe((basketProducts) => {
         this.basketProducts = basketProducts;
         this.hasItems = this.basketProducts?.length > 0;
       })
@@ -36,25 +39,22 @@ export class BillViewComponent implements OnInit, OnDestroy {
       this.basketPriceService.price$.subscribe((basketPrice) => {
         this.priceAmount = basketPrice.priceAmount;
         this.currencyCode = basketPrice.currencyCode;
-        console.log(JSON.stringify(this.priceAmount));
       })
     );
   }
 
   checkout() {
-    this.basketService.reset();
+    console.log("checkout");
+    this.basketService.submit(this.basketProducts);
+    this.basketStateService.reset();
     this.basketPriceService.reset();
   }
 
   removeItem(basketProduct: BasketProduct) {
-    this.basketService.removeFromBasket(basketProduct.product);
+    this.basketStateService.removeFromBasket(basketProduct.product);
   }
 
   getCorrectDecimal(amount: number) {
-    return (Math.round(amount * 100) / 100).toFixed(2)
-  }
-
-  getUnitEnum(value: number) {
-    return UnitEnum[value];
+    return amount.toFixed(2)
   }
 }

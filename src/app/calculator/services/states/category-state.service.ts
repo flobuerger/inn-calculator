@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { State } from 'src/app/services/state/state-model.service';
-import { ProductMockService } from '../product-mock.service';
-import { Product } from '../../models/product.model';
 import { Category } from '../../models/category.model';
 import { CategoryStates } from '../../models/states/category.state';
 
@@ -17,7 +15,7 @@ export class CategoryStateService extends State<CategoryStates> {
         (state) => state.selectedCategoryTabId
     ).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 
-    constructor(private mockService: ProductMockService) {
+    constructor() {
         super({
             categories: [],
             selectedCategoryTabId: 0

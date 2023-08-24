@@ -30,7 +30,7 @@ export class CalculatorTabsComponent implements OnInit, OnDestroy {
     )
 
     this.subscription.add(
-      this.categoryStateService.categories$.subscribe((categories) => { this.categories = categories; console.log("set categories") })
+      this.categoryStateService.categories$.subscribe((categories) => { this.categories = categories; })
     )
   }
 
