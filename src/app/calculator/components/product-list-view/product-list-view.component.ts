@@ -24,20 +24,23 @@ export class ProductListViewComponent implements OnInit, OnDestroy {
 
 
   constructor(private categoryService: CategoryStateService,
-    private basketService: BasketStateService,
-    private basketPriceService: BasketPriceService,
     private productService: ProductStateService) { }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
   ngOnInit(): void {
-
-
     this.subscription.add(
       this.categoryService.selectedCategoryTabId$.subscribe((selectedCategoryId) => {
         this.category = this.categoryService.getCategory(selectedCategoryId);
         this.products = this.productService.getProductsByCategory(selectedCategoryId);
+
+        console.log("category")
+        console.log(this.category);
+        console.log(this.category.productAreaIds.length === 0);
+
+        console.log("products")
+        console.log(this.products);
       })
     );
 

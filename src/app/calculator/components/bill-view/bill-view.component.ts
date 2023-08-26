@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { BasketProduct } from '../../models/basket-product.model';
 import { BasketPriceService } from '../../services/basket-bill-price.service';
 import { BasketStateService } from '../../services/states/basket-state.service';
-import { UnitEnum } from '../../models/enums/unit.enum';
 import { BasketService } from '../../services/basket.service';
 
 @Component({
@@ -30,6 +29,7 @@ export class BillViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.basketStateService.basketProducts$.subscribe((basketProducts) => {
+        console.log(basketProducts);
         this.basketProducts = basketProducts;
         this.hasItems = this.basketProducts?.length > 0;
       })
@@ -54,7 +54,15 @@ export class BillViewComponent implements OnInit, OnDestroy {
     this.basketStateService.removeFromBasket(basketProduct.product);
   }
 
-  getCorrectDecimal(amount: number) {
+  getCorrectDecimal(amount: number, pawnAmount = 0, hasPawn = false,) {
+    amount = hasPawn ? amount + pawnAmount : amount;
     return amount.toFixed(2)
+  }
+
+  changePawn(basketProduct: BasketProduct) {
+    console.log("changePawn");
+    console.log(basketProduct);
+    this.basketStateService.changePawn(basketProduct);
+    this.basketProducts = this.basketStateService.getBasket();
   }
 }

@@ -6,4 +6,7 @@ export interface BasketProduct {
   count: number;
   unit: UnitEnum
   amount: number;
+  showPawn: boolean;
+  hasPawn: boolean;
+  pawnAmount: number;
 }

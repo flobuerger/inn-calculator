@@ -7,6 +7,8 @@
                            [categoryId]="category.id"></product-list-area>
       </div>
     </div>
-
+    <div *ngIf="category && category.productAreaIds && category.productAreaIds.length === 0">
+      <product-list [products]="products"></product-list>
+    </div>
   </div>
 </div>

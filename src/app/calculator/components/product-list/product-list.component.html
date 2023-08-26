@@ -1,0 +1,21 @@
+<div class="flex flex-row gap-3 flex-wrap">
+    <div *ngFor="let product of products"
+         class="flex">
+        <div class="card bg-secondary product_card cursor-pointer "
+             (click)="addToBasket(product)">
+            <div class="badge card_badge">{{getBasketCount(product.id)}}</div>
+            <div class="card-body">
+                <div class="card-title">
+                    <div class="flex-col align-middle justify-center w-full min-w-fit">
+                        <div class="text-center">
+                            <div class="grow">
+                                <div>{{ product.shortDescription }}</div>
+                                <div class="font-thin">{{product.unitAmount}} {{product.unit }} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

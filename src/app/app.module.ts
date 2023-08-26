@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { CalculatorModule } from './calculator/calculator.module';
 
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment';
@@ -22,7 +22,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence()
+    AngularFirestoreModule.enablePersistence(),
   ],
   providers: [],
   bootstrap: [AppComponent],

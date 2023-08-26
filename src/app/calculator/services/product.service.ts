@@ -31,7 +31,8 @@ export class ProductService {
                     currencyCode: documentData["currencyCode"],
                     categoryId: documentData["categoryId"],
                     productAreaId: documentData["productAreaId"],
-                    hasPawn: documentData["hasPawn"]
+                    hasPawn: documentData["hasPawn"],
+                    pawnAmount: documentData["pawnAmount"]
                 }
             })
         }));

@@ -4,10 +4,6 @@ import { ProductArea } from '../../models/product-area.model';
 import { ProductAreaStateService } from '../../services/states/product-area-state.service';
 import { CategoryStateService } from '../../services/states/category-state.service';
 import { ProductStateService } from '../../services/states/product-state.service';
-import { BasketPriceService } from '../../services/basket-bill-price.service';
-import { BasketStateService } from '../../services/states/basket-state.service';
-import { BasketProduct } from '../../models/basket-product.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'product-list-area',
@@ -21,12 +17,7 @@ export class ProductListAreaComponent implements OnInit {
   productAreaService = inject(ProductAreaStateService);
   categoryService = inject(CategoryStateService);
   productService = inject(ProductStateService);
-  basketService = inject(BasketStateService);
-  basketPriceService = inject(BasketPriceService);
 
-  subscription = new Subscription();
-
-  basket: BasketProduct[] = [];
 
   @Input() productAreaId?: number;
   @Input() categoryId: number;
@@ -38,22 +29,5 @@ export class ProductListAreaComponent implements OnInit {
     } else {
       this.products = this.productService.getProductsByCategory(this.categoryId);
     }
-    this.subscription.add(
-      this.basketService.basketProducts$.subscribe((basketItems) => this.basket = basketItems)
-    );
-  }
-
-  addToBasket(product: Product) {
-    this.basketService.addToBasket(product);
-    this.basketPriceService.add(product.priceAmount, product.currencyCode);
-  }
-
-  getBasketCount(id: number) {
-    if (this.basket) {
-      const basketIndex = this.basket.findIndex(q => q.product != null && q.product.id == id);
-      if (basketIndex > -1)
-        return this.basket[basketIndex].count;
-    }
-    return 0;
   }
 }
