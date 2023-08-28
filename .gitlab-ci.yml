@@ -2,8 +2,8 @@ image: node:16
 
 stages:
   - lint
-  - test
-  - docker-build
+  - build
+  - package
 
 
 .distributed:
