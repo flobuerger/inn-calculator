@@ -21,6 +21,7 @@ stages:
 
 variables:
   GIT_DEPTH: 0
+  APP_OUTPUT_PATH: "$CI_PROJECT_DIR/artifacts/app"
 
 lint:
   stage: test
@@ -46,7 +47,9 @@ build:
   cache:
     paths:
       - node_modules/
-
+  after_script:
+    - cp $PROJECT_PATH/nginx.conf $APP_OUTPUT_PATH
+    - cp $PROJECT_PATH/Dockerfile $APP_OUTPUT_PATH
 
 
 docker-build:
