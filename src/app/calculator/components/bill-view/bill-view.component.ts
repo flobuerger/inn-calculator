@@ -5,7 +5,6 @@ import { BasketPriceService } from '../../services/basket-bill-price.service';
 import { BasketStateService } from '../../services/states/basket-state.service';
 import { BasketService } from '../../services/basket.service';
 import { PawnReturn, PawnReturnService } from '../../services/states/pawn-return.service';
-import { Currency } from '../../models/currency.model';
 
 @Component({
   selector: 'inn-calculator-bill-view',
