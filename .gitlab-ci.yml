@@ -44,7 +44,8 @@ build:
       - dist/
     expire_in: 2 hours
   after_script:
-    - cp Dockerfile dist/
+    - echo "'$CI_PROJECT_DIR'"
+    - cp $CI_PROJECT_DIR/Dockerfile dist/
   cache:
     paths:
       - node_modules/
