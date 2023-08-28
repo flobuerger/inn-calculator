@@ -22,13 +22,14 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.basketService.basketProducts$.subscribe((basketItems) => { this.basket = basketItems; console.log("items changed") })
+      this.basketService.basketProducts$.subscribe((basketItems) => { this.basket = basketItems; })
     );
   }
 
   addToBasket(product: Product) {
     this.basketService.addToBasket(product);
-    this.basketPriceService.add(product.priceAmount, product.currencyCode);
+    this.basketPriceService.add(product.priceAmount, product.currencyCode, product.hasPawn, product.pawnAmount);
+    this.basketPriceService.hasPawnItem(this.basket);
   }
 
   getBasketCount(id: number) {

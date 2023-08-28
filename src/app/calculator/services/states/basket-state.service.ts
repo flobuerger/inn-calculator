@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, shareReplay, Subject } from 'rxjs';
 import { State } from 'src/app/services/state/state-model.service';
 import { BasketProduct } from '../../models/basket-product.model';
 import { BasketState } from '../../models/states/basket-product.state';
 import { Product } from '../../models/product.model';
+import { BasketPriceService } from '../basket-bill-price.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,8 @@ export class BasketStateService extends State<BasketState> {
   );
   priceAmount = new Subject<number>();
   priceAmount$ = this.priceAmount.asObservable();
+
+  basketPriceService = inject(BasketPriceService);
 
   constructor() {
     super({
