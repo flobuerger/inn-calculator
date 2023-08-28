@@ -21,7 +21,6 @@ stages:
 
 variables:
   GIT_DEPTH: 0
-  APP_OUTPUT_PATH: "$CI_PROJECT_DIR/artifacts/app"
 
 lint:
   stage: test
@@ -49,15 +48,10 @@ build:
       - node_modules/
 
 docker-build:
-# Official docker image.
- image: docker:stable
- stage: package
- services:
-  - docker:dind
- before_script:
-  - echo $CI_BUILD_TOKEN | docker login -u "$CI_REGISTRY_USER" 
-    --password-stdin $CI_REGISTRY
- script:
-  - IMAGE_NAME="$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
-  - docker build --pull -t "$IMAGE_NAME" -f Dockerfile .
-  - docker push "$IMAGE_NAME"
+  image: docker:stable
+  stage: package
+  before_script:
+    - echo "inn-calculator:'$CI_CONCURRENT_ID'"
+  script:
+    - IMAGE_NAME="inn-calculator:$CI_CONCURRENT_ID"
+    - docker build --pull -t "$IMAGE_NAME" -f dist/Dockerfile .
