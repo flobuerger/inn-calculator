@@ -43,6 +43,8 @@ build:
     paths:
       - dist/
     expire_in: 2 hours
+  after_script:
+    - cp Dockerfile dist/
   cache:
     paths:
       - node_modules/
@@ -54,4 +56,4 @@ docker-build:
     - echo "inn-calculator:'$CI_CONCURRENT_ID'"
   script:
     - IMAGE_NAME="inn-calculator:$CI_CONCURRENT_ID"
-    - docker build --pull -t "$IMAGE_NAME" -f dist/Dockerfile .
+    - docker build --pull -t "$IMAGE_NAME" -f $CI_PROJECT_DIR/Dockerfile .
