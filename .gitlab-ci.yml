@@ -47,14 +47,14 @@ build:
     paths:
       - node_modules/
 
+
+
 docker-build:
   image: docker:stable
   stage: package
-  services:
-    - docker:dind
   before_script:
-    - echo $CI_BUILD_TOKEN | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    - docker info
+    - echo "inn-calculator:'$CI_CONCURRENT_ID'"
   script:
     - IMAGE_NAME="inn-calculator:$CI_CONCURRENT_ID"
     - docker build --pull -t "$IMAGE_NAME" -f Dockerfile .
-    - docker push "$IMAGE_NAME"
