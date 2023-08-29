@@ -50,6 +50,7 @@ build:
 
 pages:
   image: node:18-alpine
+  extends: .distributed
   cache:
     paths:
     - node_modules/
