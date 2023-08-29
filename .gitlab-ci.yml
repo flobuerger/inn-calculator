@@ -36,7 +36,7 @@ test:
 
 build:
   image: docker:stable
-  stage: package
+  stage: build
   before_script:
     - echo "inn-calculator:'$CI_CONCURRENT_ID'"
   script:
