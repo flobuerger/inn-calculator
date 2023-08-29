@@ -1,7 +1,7 @@
 image: node:16
 
 stages:
-  - lint
+  - test
   - build
   - package
 
@@ -35,10 +35,27 @@ test:
     - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t test --parallel=3 --configuration=ci
 
 build:
-  image: docker:stable
   stage: build
+  extends: .distributed
+  script:
+    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 2 hours
+  after_script:
+    - echo "'$CI_PROJECT_DIR'"
+    - cp $CI_PROJECT_DIR/Dockerfile dist/
+  cache:
+    paths:
+      - node_modules/
+
+docker-build:
+  image: docker:stable
+  extends: .distributed
+  stage: package
   before_script:
     - echo "inn-calculator:'$CI_CONCURRENT_ID'"
   script:
     - IMAGE_NAME="inn-calculator:$CI_CONCURRENT_ID"
-    - docker build --pull -t "$IMAGE_NAME" -f Dockerfile .
+    - docker build --pull -t "$IMAGE_NAME" -f $CI_PROJECT_DIR/Dockerfile .
