@@ -1,11 +1,9 @@
-services:
-  - docker:dind
+image: node:16
 
 stages:
   - test
   - build
   - deploy
-
 
 .distributed:
   interruptible: true
