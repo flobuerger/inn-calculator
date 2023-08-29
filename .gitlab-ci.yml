@@ -55,10 +55,7 @@ pages:
     - node_modules/
   stage: deploy
   script:
-  - npm install --legacy-peer-deps
-  - npm install -g @angular/cli@latest
-  - npm install --force
-  - npm run buildProd
+  - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
   artifacts:
     paths:
     - public
