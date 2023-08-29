@@ -34,26 +34,10 @@ test:
   script:
     - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t test --parallel=3 --configuration=ci
 
-build:
-  stage: build
-  extends: .distributed
-  script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
-  artifacts:
-    paths:
-      - dist/
-    expire_in: 2 hours
-  after_script:
-    - echo "'$CI_PROJECT_DIR'"
-    - cp $CI_PROJECT_DIR/Dockerfile dist/
-  cache:
-    paths:
-      - node_modules/
-
 docker-build:
   image: docker:stable
   extends: .distributed
-  stage: package
+  stage: build
   before_script:
     - echo "inn-calculator:'$CI_CONCURRENT_ID'"
   script:
