@@ -32,7 +32,8 @@ export class ProductService {
                     categoryId: documentData["categoryId"],
                     productAreaId: documentData["productAreaId"],
                     hasPawn: documentData["hasPawn"],
-                    pawnAmount: documentData["pawnAmount"]
+                    pawnAmount: documentData["pawnAmount"],
+                    subType: documentData["subType"]
                 }
             })
         }));

@@ -50,7 +50,7 @@ test:
 #     paths:
 #       - node_modules/
 
-docker-build:
+build:
   image: docker:stable
   stage: package
   before_script:

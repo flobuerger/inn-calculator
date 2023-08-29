@@ -10,6 +10,7 @@
                         <div class="text-center">
                             <div class="grow">
                                 <div>{{ product.shortDescription }}</div>
+                                <div *ngIf="product.subType">{{product.subType}}</div>
                                 <div class="font-thin">{{product.unitAmount}} {{product.unit }} </div>
                             </div>
                         </div>
