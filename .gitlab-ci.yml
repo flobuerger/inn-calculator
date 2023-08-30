@@ -57,7 +57,7 @@ pages:
   script:
   - npm install
   - npm install -g @angular/cli@latest
-  - ng build --base-href /angular-app/
+  - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
   artifacts:
     paths:
     - public
