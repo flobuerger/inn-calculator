@@ -37,7 +37,7 @@ build:
   stage: build
   extends: .distributed
   script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
+    - nx build
   artifacts:
     paths:
       - dist/
@@ -57,7 +57,7 @@ pages:
   script:
   - npm install
   - npm install -g @angular/cli@latest
-  - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
+  - nx build
   artifacts:
     paths:
     - public
