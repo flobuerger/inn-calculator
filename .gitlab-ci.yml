@@ -41,7 +41,6 @@ build:
   artifacts:
     paths:
       - dist/
-      - public/
   after_script:
     - echo "'$CI_PROJECT_DIR'"
   cache:
@@ -57,7 +56,9 @@ pages:
   script:
   - npm install
   - npm install -g @angular/cli@latest
-  - npm run build -d public
+  - npm run build
+  - mkdir -p public
+  - mv dist/angular-app/* public/
   artifacts:
     paths:
     - public
