@@ -50,13 +50,14 @@ build:
 
 pages:
   image: node:18-alpine
-  extends: .distributed
   cache:
     paths:
     - node_modules/
   stage: deploy
   script:
-  - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
+  - npm install
+  - npm install -g @angular/cli@latest
+  - ng build --base-href /angular-app/
   artifacts:
     paths:
     - public
