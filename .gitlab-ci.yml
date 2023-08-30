@@ -41,7 +41,6 @@ build:
   artifacts:
     paths:
       - dist/
-      - public
   after_script:
     - echo "'$CI_PROJECT_DIR'"
   cache:
@@ -57,7 +56,7 @@ pages:
   script:
   - npm install
   - npm install -g @angular/cli@latest
-  - npx nx build --base-href /angular-app/
+  - npx nx build --base-href /inn-calculator/
   artifacts:
     paths:
     - public
