@@ -37,7 +37,7 @@ build:
   stage: build
   extends: .distributed
   script:
-    - nx build
+    - npx nx build
   artifacts:
     paths:
       - dist/
@@ -57,7 +57,7 @@ pages:
   script:
   - npm install
   - npm install -g @angular/cli@latest
-  - nx build
+  - npx nx build
   artifacts:
     paths:
     - public
