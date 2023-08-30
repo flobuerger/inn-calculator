@@ -57,7 +57,7 @@ pages:
   script:
   - npm install
   - npm install -g @angular/cli@latest
-  - npm run build
+  - npm run build -d public
   artifacts:
     paths:
     - public
