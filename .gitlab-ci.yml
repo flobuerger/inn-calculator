@@ -57,7 +57,7 @@ pages:
   script:
   - npm install
   - npm install -g @angular/cli@latest
-  - npx nx build
+  - npx nx build --base-href /angular-app/
   artifacts:
     paths:
     - public
