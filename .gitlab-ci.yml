@@ -57,7 +57,7 @@ pages:
   script:
   - npm install
   - npm install -g @angular/cli@latest
-  - npx nx build --base-href $CI_PROJECT_DIR
+  - npm run build
   artifacts:
     paths:
     - public
