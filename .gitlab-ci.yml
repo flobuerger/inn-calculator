@@ -12,9 +12,9 @@ stages:
       files:
         - package-lock.json
     paths:
-      - .npm/
+      - node_modules
   before_script:
-    - npm i --cache .npm
+    - npm i --cache node_modules
     - NX_HEAD=$CI_COMMIT_SHA
     - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
 
@@ -54,9 +54,9 @@ pages:
     - node_modules/
   stage: deploy
   script:
-  - npm install
-  - npm install -g @angular/cli@latest
-  - npm run build
+  - yarn install
+  - yarn install -g @angular/cli@latest
+  - yarn run build
   - mkdir -p public
   - mv inn-calculator/* public/
   artifacts:
