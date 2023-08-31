@@ -12,9 +12,9 @@ stages:
       files:
         - package-lock.json
     paths:
-      - node_modules
+      - .npm/
   before_script:
-    - npm i --cache node_modules
+    - yarn i --cache .npm
     - NX_HEAD=$CI_COMMIT_SHA
     - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
 
