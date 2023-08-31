@@ -3,7 +3,7 @@
     "strictPropertyInitialization": false,
     "rootDir": ".",
     "sourceMap": true,
-    "outDir": "/dist/angular-app",
+    "outDir": "inn-calculator",
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
