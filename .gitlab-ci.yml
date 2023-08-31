@@ -56,7 +56,7 @@ pages:
   script:
   - npm install
   - npm install -g @angular/cli@latest
-  - npm run build --base-href /croquis-time-client/
+  - npm run build --base-href /inn-calculator/
   - mkdir -p public --base-href inn-calculator
   - mv inn-calculator/* public/inn-calculator/
   artifacts:
