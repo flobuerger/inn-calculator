@@ -3,13 +3,13 @@
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "./src",
-  "prefix": "inn-calculator",
+  "prefix": "",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "public",
+        "outputPath": "inn-calculator",
         "index": "./src/index.html",
         "main": "./src/main.ts",
         "polyfills": ["zone.js"],
