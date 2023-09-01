@@ -34,7 +34,7 @@ build:
     - npx nx build
   artifacts:
     paths:
-      - dist/
+      - inn-calculator/
   after_script:
     - echo "'$CI_PROJECT_DIR'"
   cache:
