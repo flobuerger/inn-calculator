@@ -50,7 +50,7 @@ pages:
   script:
   - yarn add @angular/cli@latest
   - yarn install
-  - yarn run build --base-href /inn-calculator/
+  - yarn run build 
   artifacts:
     paths:
     - public
