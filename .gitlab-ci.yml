@@ -27,20 +27,6 @@ lint:
   script:
     - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t lint --parallel=3
 
-build:
-  stage: build
-  extends: .distributed
-  script:
-    - npx nx build
-  artifacts:
-    paths:
-      - public
-  after_script:
-    - echo "'$CI_PROJECT_DIR'"
-  cache:
-    paths:
-      - node_modules/
-
 pages:
   image: node:18.10.0
   cache:
