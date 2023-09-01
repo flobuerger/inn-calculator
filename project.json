@@ -9,7 +9,8 @@
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "inn-calculator",
+        "baseHref": "/inn-calculator/",
+        "outputPath": "dist/inn-calculator",
         "index": "./src/index.html",
         "main": "./src/main.ts",
         "polyfills": ["zone.js"],

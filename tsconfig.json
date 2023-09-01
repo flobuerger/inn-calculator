@@ -3,7 +3,7 @@
     "strictPropertyInitialization": false,
     "rootDir": ".",
     "sourceMap": true,
-    "outDir": "inn-calculator",
+    "outDir": "./dist/out-tsc",
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
