@@ -36,7 +36,7 @@ pages:
   script:
   - yarn add @angular/cli@latest
   - yarn install
-  - yarn run build --prod --base-href /inn-calculator/
+  - yarn run build --prod --base-href=/inn-calculator/
   artifacts:
     paths:
     - public
