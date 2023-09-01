@@ -27,6 +27,20 @@ lint:
   script:
     - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t lint --parallel=3
 
+build:
+  stage: build
+  extends: .distributed
+  script:
+    - yarn run build --prod --base-href=/inn-calculator/
+  artifacts:
+    paths:
+      - public
+  after_script:
+    - echo "'$CI_PROJECT_DIR'"
+  cache:
+    paths:
+      - node_modules/
+
 pages:
   image: node:18.10.0
   cache:
@@ -37,6 +51,8 @@ pages:
   - yarn add @angular/cli@latest
   - yarn install
   - yarn run build --prod --base-href=/inn-calculator/
+  - echo ${CI_PROJECT_DIR}
+  - ls
   artifacts:
     paths:
     - public
