@@ -1,4 +1,4 @@
-image: node:16
+image: node:18.10.0
 
 stages:
   - test
@@ -48,17 +48,15 @@ build:
       - node_modules/
 
 pages:
-  image: node:16-alpine
+  image: node:18.10.0
   cache:
     paths:
     - node_modules/
   stage: deploy
   script:
+  - yarn add @angular/cli@latest
   - yarn install
-  - yarn install -g @angular/cli@latest
-  - yarn run build
-  - mkdir -p public
-  - mv inn-calculator/* public/
+  - yarn run buildProd
   artifacts:
     paths:
     - public
