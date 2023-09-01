@@ -56,7 +56,7 @@ pages:
   script:
   - yarn add @angular/cli@latest
   - yarn install
-  - yarn run buildProd
+  - yarn run build
   artifacts:
     paths:
     - public
