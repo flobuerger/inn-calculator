@@ -50,7 +50,7 @@ pages:
   script:
   - yarn add @angular/cli@latest
   - yarn install
-  - yarn run build --prod --base-href=/inn-calculator/
+  - yarn run build_prod
   - echo ${CI_PROJECT_DIR}
   - ls
   artifacts:

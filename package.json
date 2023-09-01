@@ -7,7 +7,8 @@
     "debug:inn-calculator": "nx serve",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "build_prod":"nx build --prod --base-href=/inn-calculator/ --output-path=inn-calculator"
   },
   "publishConfig": {
     "registry": "https://gitlab.company.com/api/v4/projects/44237280/packages/npm/"
