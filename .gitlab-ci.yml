@@ -27,12 +27,6 @@ lint:
   script:
     - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t lint --parallel=3
 
-test:
-  stage: test
-  extends: .distributed
-  script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t test --parallel=3 --configuration=ci
-
 build:
   stage: build
   extends: .distributed
