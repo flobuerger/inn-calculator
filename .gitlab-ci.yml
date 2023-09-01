@@ -34,7 +34,7 @@ build:
     - npx nx build
   artifacts:
     paths:
-      - inn-calculator/
+      - public/
   after_script:
     - echo "'$CI_PROJECT_DIR'"
   cache:
@@ -53,4 +53,4 @@ pages:
   - yarn run build 
   artifacts:
     paths:
-    - public
+    - public/
