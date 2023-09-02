@@ -10,7 +10,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "baseHref": "/inn-calculator/",
-        "outputPath": "dist/inn-calculator",
+        "outputPath": "public",
         "index": "./src/index.html",
         "main": "./src/main.ts",
         "polyfills": ["zone.js"],

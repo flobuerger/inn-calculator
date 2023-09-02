@@ -31,7 +31,7 @@ build:
   stage: build
   extends: .distributed
   script:
-    - yarn run build --prod --base-href=/inn-calculator/
+    - yarn run build_prod
   artifacts:
     paths:
       - public
