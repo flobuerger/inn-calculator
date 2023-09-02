@@ -53,6 +53,8 @@ pages:
   - yarn run build_prod
   - echo ${CI_PROJECT_DIR}
   - ls
+  - mkdir public/
+  - mv inn-calculator public/
   artifacts:
     paths:
     - public
