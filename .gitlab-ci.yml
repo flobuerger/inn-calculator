@@ -51,8 +51,6 @@ pages:
   - yarn add @angular/cli@latest
   - yarn install
   - yarn run build_prod
-  - mkdir public/
-  - mv ${CI_PROJECT_DIR} public/
   artifacts:
     paths:
     - public
