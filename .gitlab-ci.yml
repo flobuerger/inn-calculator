@@ -51,11 +51,8 @@ pages:
   - yarn add @angular/cli@latest
   - yarn install
   - yarn run build_prod
-  - echo ${CI_PROJECT_DIR}
-  - cd ${CI_PROJECT_DIR}
-  - ls
   - mkdir public/
-  - mv inn-calculator public/
+  - mv ${CI_PROJECT_DIR} public/
   artifacts:
     paths:
     - public
