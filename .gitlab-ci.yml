@@ -52,6 +52,7 @@ pages:
   - yarn install
   - yarn run build_prod
   - echo ${CI_PROJECT_DIR}
+  - cd ${CI_PROJECT_DIR}
   - ls
   - mkdir public/
   - mv inn-calculator public/
