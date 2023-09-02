@@ -5,4 +5,5 @@ export interface Category {
     createdOn: Date;
     modifiedOn: Date;
     productAreaIds: number[];
+    icon: string;
 }

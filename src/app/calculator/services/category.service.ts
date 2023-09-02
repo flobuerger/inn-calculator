@@ -21,7 +21,8 @@ export class CategoryService {
                     displayName: documentData["displayName"],
                     createdOn: documentData["createdOn"],
                     modifiedOn: documentData["modifiedOn"],
-                    productAreaIds: documentData["productAreaIds"]
+                    productAreaIds: documentData["productAreaIds"],
+                    icon: documentData["icon"]
                 }
             })
         }));

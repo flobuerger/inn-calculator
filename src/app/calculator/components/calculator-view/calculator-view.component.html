@@ -1,14 +1,14 @@
-<div class="flex w-full h-full p-5 gap-5">
+<div class="flex w-full min-h-full p-5 gap-5 flex-grow">
   <div class="w-2/3 border border-gray-200 bg-zinc-100 card">
-    <div class="flex align-baseline justify-start text-white w-full">
-      <inn-calculator-tabs></inn-calculator-tabs>
+    <div class="flex align-baseline justify-start text-white w-full flex-grow">
+      <inn-calculator-tabs class="w-full"></inn-calculator-tabs>
     </div>
     <div class="card-body w-full h-full p-2 bg-white">
       <inn-calculator-product-list-view></inn-calculator-product-list-view>
     </div>
   </div>
-  <div class="w-1/3 border border-gray-200 bg-zinc-100 card">
-    <div class="card-body w-full h-full p-2 rounded-md">
+  <div class="w-1/3 border border-gray-200 bg-zinc-100 card flex-grow ">
+    <div class="card-body w-full h-full p-2 rounded-md flex-grow">
       <inn-calculator-bill-view></inn-calculator-bill-view>
     </div>
   </div>

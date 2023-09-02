@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Category } from 'src/app/calculator/models/category.model';
 import { Subscription } from 'rxjs';
 import { CategoryStateService } from 'src/app/calculator/services/states/category-state.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'inn-calculator-tabs',
@@ -9,6 +10,7 @@ import { CategoryStateService } from 'src/app/calculator/services/states/categor
   styleUrls: ['./calculator-tabs.component.css'],
 })
 export class CalculatorTabsComponent implements OnInit, OnDestroy {
+  @ViewChild("iconContainer") public iconContainer: HTMLElement;
   categories: Category[];
   selectedCategoryId: number;
 
@@ -18,7 +20,7 @@ export class CalculatorTabsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  constructor(private categoryStateService: CategoryStateService) {
+  constructor(private categoryStateService: CategoryStateService, public sanitizer: DomSanitizer) {
 
   }
 
