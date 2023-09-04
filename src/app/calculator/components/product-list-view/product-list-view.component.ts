@@ -1,8 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Product } from '../../models/product';
-import { BasketPriceService } from '../../services/states/basket-price.service';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Subscription, } from 'rxjs';
+import { Product } from '../../models/product.model';
+import { CategoryStateService } from '../../services/states/category-state.service';
 import { ProductStateService } from '../../services/states/product-state.service';
+import { ProductAreaStateService } from '../../services/states/product-area-state.service';
+import { Category } from '../../models/category.model';
 
 @Component({
   selector: 'inn-calculator-product-list-view',
@@ -10,20 +12,27 @@ import { ProductStateService } from '../../services/states/product-state.service
   styleUrls: ['./product-list-view.component.scss'],
 })
 export class ProductListViewComponent implements OnInit, OnDestroy {
-  subscription = new Subscription();
-  products!: Product[];
-  selectedProduct!: Product;
+  productAreaStateService = inject(ProductAreaStateService);
 
-  constructor(private productService: ProductStateService) {}
+  subscription = new Subscription();
+  products: Product[];
+  selectedProduct!: Product;
+  category: Category;
+
+  constructor(private categoryService: CategoryStateService,
+    private productService: ProductStateService) { }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
   ngOnInit(): void {
     this.subscription.add(
-      this.productService.products$.subscribe((products) => {
-        this.products = products;
-        console.log(products);
+      this.categoryService.selectedCategoryTabId$.subscribe((selectedCategoryId) => {
+        this.category = this.categoryService.getCategory(selectedCategoryId);
+        this.products = this.productService.getProductsByCategory(selectedCategoryId);
       })
     );
+
   }
+
 }

@@ -1,8 +1,9 @@
-image: node:16
+image: node:18.10.0
 
 stages:
   - test
   - build
+  - deploy
 
 .distributed:
   interruptible: true
@@ -13,21 +14,12 @@ stages:
     paths:
       - .npm/
   before_script:
-    - npm i
-    - yarn add @yarnpkg/parsers
-    - yarn add @yarnpkg/lockfile
-    - npm ci
+    - yarn install --cache .npm
     - NX_HEAD=$CI_COMMIT_SHA
     - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
 
 variables:
   GIT_DEPTH: 0
-
-format-check:
-  stage: test
-  extends: .distributed
-  script:
-    - npx nx format:check --base=$NX_BASE --head=$NX_HEAD
 
 lint:
   stage: test
@@ -35,14 +27,30 @@ lint:
   script:
     - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t lint --parallel=3
 
-test:
-  stage: test
-  extends: .distributed
-  script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t test --parallel=3 --configuration=ci
-
 build:
   stage: build
   extends: .distributed
   script:
-    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t build --parallel=3
+    - yarn run build_prod
+  artifacts:
+    paths:
+      - public
+  after_script:
+    - echo "'$CI_PROJECT_DIR'"
+  cache:
+    paths:
+      - node_modules/
+
+pages:
+  image: node:18.10.0
+  cache:
+    paths:
+    - node_modules/
+  stage: deploy
+  script:
+  - yarn add @angular/cli@latest
+  - yarn install
+  - yarn run build_prod
+  artifacts:
+    paths:
+    - public

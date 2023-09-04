@@ -41,3 +41,8 @@ Thumbs.db
 
 .vscode
 .package-lock.json
+
+.yarn-error.log
+
+public/
+inn-calculator/

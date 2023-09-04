@@ -1,0 +1,15 @@
+<div class="flex flex-row gap-3 w-full justify-start overflow-hidden"
+     *ngIf="categories">
+     <div *ngFor="let category of categories">
+          <div class="btn btn-neutral text-white rounded-t-lg rounded-b-none text-2xl font-thin h-14 hidden lg:flex lg:text-lg md:text-md text-sm"
+               [ngClass]="category !== null && category.id.toString() === selectedCategoryId.toString() ? 'bg-primary' : ''"
+               id="{{category.id}}"
+               (click)="changeTab($event)">{{category.displayName}}</div>
+          <div class="btn btn-neutral text-white rounded-t-lg rounded-b-none text-2xl font-thin h-14 lg:hidden flex"
+               [ngClass]="category !== null && category.id.toString() === selectedCategoryId.toString() ? 'bg-primary' : ''"
+               id="{{category.id}}"
+               (click)="changeTab($event)"
+               [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(category.icon)">
+          </div>
+     </div>
+</div>

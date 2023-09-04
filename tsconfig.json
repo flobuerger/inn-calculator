@@ -3,6 +3,7 @@
     "strictPropertyInitialization": false,
     "rootDir": ".",
     "sourceMap": true,
+    "outDir": "./dist/out-tsc",
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,

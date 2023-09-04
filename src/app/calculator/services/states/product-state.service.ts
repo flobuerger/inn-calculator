@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { State } from 'src/app/services/state/state-model.service';
-import { Product } from '../../models/product';
-import { ProductStates } from '../../models/product.state';
-import { ProductMockService } from '../product-mock.service';
+import { ProductStates } from '../../models/states/product.state';
+import { Product } from '../../models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,7 @@ export class ProductStateService extends State<ProductStates> {
     (state) => state.products
   ).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 
-  constructor(private mockService: ProductMockService) {
+  constructor() {
     super({
       products: [],
     });
@@ -23,7 +22,7 @@ export class ProductStateService extends State<ProductStates> {
     this.setState({ products: [...this.state.products, product] });
   }
 
-  getProduct(id: string): Product {
+  getProduct(id: number): Product {
     return this.state.products.filter((product) => product.id == id)[0];
   }
 
@@ -32,6 +31,14 @@ export class ProductStateService extends State<ProductStates> {
   }
 
   getProducts(): Product[] {
-    return this.state.products;
+    return this.state.products.sort((a: Product, b: Product) => a.sortOrder - b.sortOrder);
+  }
+
+  getProductsByCategory(categoryId: number) {
+    return this.state.products.filter(q => q.categoryId == categoryId).sort((a: Product, b: Product) => a.sortOrder - b.sortOrder);
+  }
+
+  getProductsByCategoryAndProductArea(categoryId: number, productAreaId: number) {
+    return this.state.products.filter(q => q.categoryId == categoryId && q.productAreaId == productAreaId).sort((a: Product, b: Product) => a.sortOrder - b.sortOrder);
   }
 }
