@@ -25,6 +25,7 @@ export class BasketService {
                 unitAmount: basketProduct.product.unitAmount,
                 unit: basketProduct.unit,
                 hasPawn: basketProduct.hasPawn,
+                productType: basketProduct.product.productType
             });
         });
 

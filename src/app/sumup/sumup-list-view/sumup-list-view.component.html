@@ -1,0 +1,36 @@
+<div>List</div>
+<div *ngIf="bookedProducts | async as bookedProductsList"
+     class="text-black flex align-middle w-full justify-center">
+    <table class="table w-full m-5"
+           aria-describedby="productstable">
+        <!-- head -->
+        <thead>
+            <tr class="text-white">
+                <th id="type">Typ</th>
+                <th id="count">Anzahl</th>
+                <th id="multi"></th>
+                <th id="name">Name</th>
+                <th id="sum">Betrag</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bookedProduct of bookedProductsList">
+                <td>{{bookedProduct.productType}}</td>
+                <td>{{bookedProduct.productCount}}</td>
+                <td>x</td>
+                <td>{{bookedProduct.productName}} ({{bookedProduct.unitAmount}} {{bookedProduct.unit}})</td>
+                <td class="bg-slate-200 border-l-2 border-l-slate-600 text-lg font-bold">{{bookedProduct.fullProductPriceAmount}}</td>
+            </tr>
+
+        </tbody>
+        <tfoot class="text-white">
+            <tr class="bg-white">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-xl text-end">Summe</td>
+                <td class="bg-slate-400 border-l-2 border-l-slate-600 text-xl font-bold">{{bookedProductsFullAmount}}</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
