@@ -6,7 +6,7 @@ import { BookedProductModel } from '../models/sumup-response.model';
 @Component({
   selector: 'sumup-list-view',
   templateUrl: './sumup-list-view.component.html',
-  styleUrls: ['./sumup-list-view.component.css'],
+  styleUrls: ['./sumup-list-view.component.scss'],
 })
 export class SumupListViewComponent implements OnInit {
   bookedProductService = inject(BookedProductService);
