@@ -13,14 +13,44 @@ export class SumupListViewComponent implements OnInit {
 
   bookedProducts: Observable<BookedProductModel[]>;
   bookedProductsFullAmount = 0;
-  ngOnInit(): void {
-    this.bookedProducts = this.bookedProductService.getBookedByDate(new Date("01.0.1.2020"), new Date("10.10.2023"));
-    this.bookedProducts.subscribe((bookedProducts) => {
 
+  from: Date = new Date();
+  until: Date = new Date();
+
+  ngOnInit(): void {
+    this.loadBookings();
+  }
+
+  loadBookings() {
+    this.bookedProductsFullAmount = 0;
+    this.bookedProducts = this.bookedProductService.getBookedByDate(this.from, this.until);
+
+
+    this.bookedProducts.subscribe((bookedProducts) => {
       bookedProducts.forEach((bookedProduct) => {
         this.bookedProductsFullAmount = this.bookedProductsFullAmount + bookedProduct.fullProductPriceAmount
-        console.log(this.bookedProductsFullAmount);
       })
     })
+  }
+
+  setFrom(event: any) {
+    this.from = new Date(event.target.value)
+    console.log("from"); console.log(this.from);
+    this.loadBookings();
+  }
+
+  setTo(event: any) {
+    this.until = new Date(event.target.value)
+    console.log("from"); console.log(this.from);
+    this.loadBookings();
+  }
+
+  setToToday() {
+    this.until = new Date(Date.now());
+    this.from = new Date(Date.now());
+
+    console.log("until"); console.log(this.until);
+
+    console.log("from"); console.log(this.from);
   }
 }

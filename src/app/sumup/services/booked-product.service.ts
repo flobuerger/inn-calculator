@@ -20,15 +20,13 @@ export class BookedProductService {
                     productName: documentData["productName"],
                     unitAmount: documentData["unitAmount"],
                     unit: documentData["unit"],
-                    bookedOn: new Date(documentData["createdOn"]),
+                    bookedOn: documentData["createdOn"].toDate(),
                     fullProductPriceAmount: documentData["fullProductPriceAmount"]
                 }
             })
-            return this.combineProductUnits(products);
-        }),
-            filter((documentData: BookedProductModel) => documentData.bookedOn >= new Date(from) && documentData.bookedOn <= new Date(to))));
-
-
+            return this.combineProductUnits(products.filter((documentData: BookedProductModel) => documentData.bookedOn >= from && documentData.bookedOn <= to));
+        })
+        ));
     };
 
     combineProductUnits(bookedProducts: BookedProductModel[]) {

@@ -4,7 +4,9 @@
         <div class="form-control">
             <label class="label cursor-pointer">
                 <input type="checkbox"
-                       class="checkbox checkbox-sm" />
+                       class="checkbox checkbox-sm"
+                       value="isTodayChecked"
+                       (change)="setToToday()" />
                 <span class="label-text ml-2">Heute</span>
             </label>
         </div>
@@ -15,14 +17,20 @@
                class="mr-2">Von:</label>
         <input id="from"
                type="date"
+               [(ngModel)]="from"
+               (change)="setFrom($event)"
                class="text-gray-400" />
     </div>
     <div class="mx-5 h-full self-center">
         <label for="to"
                class="mr-2">Bis:</label>
-        <input id="from"
+        <input id="to"
                type="date"
-               class="text-gray-400" />
+               format
+               [(ngModel)]="until"
+               (change)="setTo($event)"
+               class="
+               text-gray-400" />
     </div>
 </div>
 <div *ngIf="bookedProducts | async as bookedProductsList"
