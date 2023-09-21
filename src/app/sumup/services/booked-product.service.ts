@@ -24,7 +24,7 @@ export class BookedProductService {
                     fullProductPriceAmount: documentData["fullProductPriceAmount"]
                 }
             })
-            return this.combineProductUnits(products.filter((documentData: BookedProductModel) => documentData.bookedOn >= from && documentData.bookedOn <= to));
+            return this.combineProductUnits(products.filter((documentData: BookedProductModel) => documentData.bookedOn >= new Date(from) && documentData.bookedOn <= new Date(to)));
         })
         ));
     };

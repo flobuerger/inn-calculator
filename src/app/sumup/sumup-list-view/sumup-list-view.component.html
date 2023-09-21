@@ -3,11 +3,8 @@
     <div>
         <div class="form-control">
             <label class="label cursor-pointer">
-                <input type="checkbox"
-                       class="checkbox checkbox-sm"
-                       value="isTodayChecked"
-                       (change)="setToToday()" />
-                <span class="label-text ml-2">Heute</span>
+                <button class="btn btn-sm"
+                        (click)="setToToday()">Heute</button>
             </label>
         </div>
     </div>
@@ -26,7 +23,6 @@
                class="mr-2">Bis:</label>
         <input id="to"
                type="date"
-               format
                [(ngModel)]="until"
                (change)="setTo($event)"
                class="
@@ -42,7 +38,6 @@
             <tr class="text-white">
                 <th id="type">Typ</th>
                 <th id="count">Anzahl</th>
-                <th id="multi"></th>
                 <th id="name">Name</th>
                 <th id="sum">Betrag</th>
             </tr>
@@ -51,15 +46,15 @@
             <tr *ngFor="let bookedProduct of bookedProductsList">
                 <td>{{bookedProduct.productType}}</td>
                 <td>{{bookedProduct.productCount}}</td>
-                <td>x</td>
                 <td>{{bookedProduct.productName}} ({{bookedProduct.unitAmount}} {{bookedProduct.unit}})</td>
                 <td class="bg-slate-200 border-l-2 border-l-slate-600 text-lg font-bold">{{bookedProduct.fullProductPriceAmount}}</td>
             </tr>
-
+            <tr *ngIf="bookedProductsList.length === 0">
+                <td>Keine Bestellungen gefunden!</td>
+            </tr>
         </tbody>
         <tfoot class="text-white">
             <tr class="bg-white">
-                <td></td>
                 <td></td>
                 <td></td>
                 <td class="text-xl text-end">Summe</td>
