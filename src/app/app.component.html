@@ -41,8 +41,9 @@
                                 <div class="form-control">
                                     <label class="label cursor-pointer">
                                         <input type="checkbox"
-                                               checked="checked"
-                                               class="checkbox checkbox-sm checkbox-primary" />
+                                               class="checkbox checkbox-sm checkbox-primary"
+                                               [(ngModel)]="hasSpecialPrices"
+                                               (change)="setProductsByState()" />
                                         <span class="label-text ml-2 text-lg">Freitagspreise</span>
 
                                     </label>

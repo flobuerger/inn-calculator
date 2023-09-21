@@ -12,9 +12,14 @@ export class ProductStateService extends State<ProductStates> {
     (state) => state.products
   ).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 
+  hasDiscountedCheckboxSelected$: Observable<boolean> = this.select(
+    (state) => state.hasDiscountedCheckboxSelected
+  ).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
+
   constructor() {
     super({
       products: [],
+      hasDiscountedCheckboxSelected: false
     });
   }
 
@@ -40,5 +45,9 @@ export class ProductStateService extends State<ProductStates> {
 
   getProductsByCategoryAndProductArea(categoryId: number, productAreaId: number) {
     return this.state.products.filter(q => q.categoryId == categoryId && q.productAreaId == productAreaId).sort((a: Product, b: Product) => a.sortOrder - b.sortOrder);
+  }
+
+  setHasDiscountedCheckboxSelected(state: boolean) {
+    this.setState({ hasDiscountedCheckboxSelected: state });
   }
 }

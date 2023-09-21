@@ -11,7 +11,6 @@ import { PawnReturn } from './states/pawn-return.service';
   providedIn: 'root',
 })
 export class BasketPriceService extends State<BasketPriceState> {
-
   price$: Observable<BasketPriceState> = this.select((state) => state).pipe(
     shareReplay({ refCount: true, bufferSize: 1 })
   );
@@ -50,10 +49,20 @@ export class BasketPriceService extends State<BasketPriceState> {
     this.setState({ hasPawnItem: hasPawnItem })
   }
 
-  reCaclulate(basketProducts: BasketProduct[], pawnReturns: PawnReturn[]) {
+  reCaclulate(basketProducts: BasketProduct[], pawnReturns: PawnReturn[], hasSepcialPricesSelected?: boolean) {
     let amount = 0;
     basketProducts.forEach((basketProduct) => {
-      amount = amount + (basketProduct.amount * basketProduct.count) + (basketProduct.hasPawn ? (basketProduct.count * basketProduct.pawnAmount) : 0);
+      const pawnAmount = hasSepcialPricesSelected === true ? 0 : basketProduct.hasPawn ? (basketProduct.count * basketProduct.pawnAmount) : 0;
+      const productPriceAmount = hasSepcialPricesSelected === true ? basketProduct.product.discountPrice ? basketProduct.product.discountPrice * basketProduct.count : basketProduct.amount * basketProduct.count : basketProduct.amount * basketProduct.count;
+
+      console.log("------")
+      console.log(basketProduct.product.name);
+      console.log("pawnAmount");
+      console.log(pawnAmount);
+      console.log("productPriceAmount");
+      console.log(productPriceAmount);
+
+      amount = amount + productPriceAmount + (pawnAmount);
     });
     pawnReturns.forEach((pawnReturnItem) => {
       amount = amount + pawnReturnItem.pawnAmount;
@@ -61,7 +70,10 @@ export class BasketPriceService extends State<BasketPriceState> {
     this.setState({ priceAmount: amount })
   }
 
-  getPawnAmount(basketProducts: BasketProduct[]) {
+  getPawnAmount(basketProducts: BasketProduct[], hasSepcialPricesSelected?: boolean) {
+    if (hasSepcialPricesSelected)
+      return 0;
+
     let amount = 0;
     basketProducts.forEach((basketProduct) => {
       amount = amount + (basketProduct.hasPawn ? (basketProduct.count * basketProduct.pawnAmount) : 0);

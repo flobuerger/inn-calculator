@@ -42,7 +42,8 @@ export class BasketStateService extends State<BasketState> {
         amount: product.priceAmount,
         showPawn: product.hasPawn,
         hasPawn: product.hasPawn,
-        pawnAmount: product.pawnAmount
+        pawnAmount: product.pawnAmount,
+        hasDiscountedPrice: product.hasDiscount
       };
       this.setState({
         basketProducts: [...this.state.basketProducts, newBasketProduct],

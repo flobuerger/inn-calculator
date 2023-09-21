@@ -5,6 +5,7 @@ import { ProductService } from './calculator/services/product.service';
 import { CategoryService } from './calculator/services/category.service';
 import { ProductAreaService } from './calculator/services/product-area.service';
 import { ProductAreaStateService } from './calculator/services/states/product-area-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'inn-calculator-root',
@@ -14,6 +15,11 @@ import { ProductAreaStateService } from './calculator/services/states/product-ar
 export class AppComponent implements OnInit {
   productAreaService = inject(ProductAreaService);
   productAreaStateService = inject(ProductAreaStateService);
+
+  subscription = new Subscription();
+
+  hasSpecialPrices = false;
+  title = 'inn-calculator';
 
   constructor(private categoryService: CategoryService, private categoryStateService: CategoryStateService,
     private productStateService: ProductStateService,
@@ -31,7 +37,9 @@ export class AppComponent implements OnInit {
     this.productAreaService.getProductAreas().subscribe((productAreas) => {
       this.productAreaStateService.setProductAreas(productAreas);
     })
-
   }
-  title = 'inn-calculator';
+
+  setProductsByState() {
+    this.productStateService.setHasDiscountedCheckboxSelected(this.hasSpecialPrices);
+  }
 }

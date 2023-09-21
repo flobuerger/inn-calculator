@@ -18,4 +18,6 @@ export interface Product {
   subType?: string;
   hasPawn: boolean;
   pawnAmount: number;
+  hasDiscount: boolean;
+  discountPrice?: number;
 }

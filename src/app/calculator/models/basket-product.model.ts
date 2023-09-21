@@ -9,4 +9,5 @@ export interface BasketProduct {
   showPawn: boolean;
   hasPawn: boolean;
   pawnAmount: number;
+  hasDiscountedPrice: boolean;
 }
