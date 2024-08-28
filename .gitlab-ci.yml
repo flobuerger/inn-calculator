@@ -1,0 +1,56 @@
+image: node:18.10.0
+
+stages:
+  - test
+  - build
+  - deploy
+
+.distributed:
+  interruptible: true
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+  before_script:
+    - yarn install --cache .npm
+    - NX_HEAD=$CI_COMMIT_SHA
+    - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
+
+variables:
+  GIT_DEPTH: 0
+
+lint:
+  stage: test
+  extends: .distributed
+  script:
+    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t lint --parallel=3
+
+build:
+  stage: build
+  extends: .distributed
+  script:
+    - yarn run build_prod
+  artifacts:
+    paths:
+      - public
+  after_script:
+    - echo "'$CI_PROJECT_DIR'"
+  cache:
+    paths:
+      - node_modules/
+
+pages:
+  image: node:18.10.0
+  cache:
+    paths:
+    - node_modules/
+  stage: deploy
+  script:
+  - yarn add @angular/cli@latest
+  - yarn install
+  - yarn run build_prod
+  artifacts:
+    paths:
+    - public

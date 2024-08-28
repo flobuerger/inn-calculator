@@ -1,0 +1,14 @@
+<div class="flex flex-col w-full h-full">
+  <div class="flex flex-row gap-2 mt-5 flex-wrap">
+    <div *ngIf="category && category.productAreaIds && category.productAreaIds.length > 0"
+         class="w-full">
+      <div *ngFor="let productAreaId of category.productAreaIds">
+        <product-list-area [productAreaId]="productAreaId"
+                           [categoryId]="category.id"></product-list-area>
+      </div>
+    </div>
+    <div *ngIf="category && category.productAreaIds && category.productAreaIds.length === 0">
+      <product-list [products]="products"></product-list>
+    </div>
+  </div>
+</div>

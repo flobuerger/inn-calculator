@@ -1,0 +1,155 @@
+<div class="text-black h-full">
+  <div class="flex-grow">
+    <div class="flex flex-row ">
+      <button class="btn btn-circle"
+              *ngIf="hasPawnItem && !hasSepcialPricesSelected"
+              (click)="toggleDismissPawns()"
+              [ngClass]="dismissAllPawns === true ? 'bg-red-500' : 'bg-green-100'">
+        <svg width="24px"
+             height="24px"
+             viewBox="0 0 1024 1024"
+             class="icon"
+             xmlns="http://www.w3.org/2000/svg">
+          <path fill="#000000"
+                d="M736 800V160H160v640a64 64 0 0064 64h448a64 64 0 0064-64zm64-544h63.552a96 96 0 0196 96v224a96 96 0 01-96 96H800v128a128 128 0 01-128 128H224A128 128 0 0196 800V128a32 32 0 0132-32h640a32 32 0 0132 32v128zm0 64v288h63.552a32 32 0 0032-32V352a32 32 0 00-32-32H800z" />
+        </svg>
+      </button>
+      <button class="btn btn-circle ml-3"
+              *ngIf=" !hasSepcialPricesSelected"
+              (click)="addPawnReturn()">
+        <svg width="24px"
+             height="24px"
+             viewBox="0 0 64 64"
+             xmlns="http://www.w3.org/2000/svg"
+             stroke-width="3"
+             stroke="#000000"
+             fill="none">
+          <path d="M54.89,26.73A23.52,23.52,0,0,1,15.6,49"
+                stroke-linecap="round" />
+          <path d="M9,37.17a23.75,23.75,0,0,1-.53-5A23.51,23.51,0,0,1,48.3,15.2"
+                stroke-linecap="round" />
+          <polyline points="37.73 16.24 48.62 15.44 47.77 5.24"
+                    stroke-linecap="round" />
+          <polyline points="25.91 47.76 15.03 48.56 15.88 58.76"
+                    stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <div *ngIf="pawnReturnItems && pawnReturnItems.length > 0">
+      <div class="divider"></div>
+      <div class="flex flex-row items-center">
+        <div class="flex-grow">Retour-Bechereinsatz:&nbsp;</div>
+        <div class="flex-none">{{pawnReturnAmount}} {{ pawnReturnCurrency }}</div>
+        <div class="ml-2">
+          <button class="btn btn-error btn-sm"
+                  (click)="removePawnReturn()">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 class="w-6 h-6">
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div *ngFor="let basketProduct of basketProducts"
+         class="lg:text-lg md:text-md sm:text-sm">
+      <div class="flex basketProduct">
+        <div class="flex flex-row flex-grow overflow-hidden font-thin">
+          <div class="flex-none">{{ basketProduct.count }}</div>
+          <div class="flex-none mx-2">x</div>
+          <div class="flex-none">
+            {{ basketProduct.product.shortDescription }} <label *ngIf="hasSepcialPricesSelected === true && basketProduct.hasDiscountedPrice"
+                   class="font-thin">(Freitagspreis)</label>
+          </div>
+          <div class="flex-none">&nbsp;({{basketProduct.product.unitAmount}} {{basketProduct.unit}})</div>
+        </div>
+        <div class="flex-none">
+          {{ getCorrectDecimal( checkAndGetSpecialPrice(basketProduct) * basketProduct.count, (checkAndGetSpecialPawn(basketProduct) * basketProduct.count),basketProduct.hasPawn) }}
+          {{ basketProduct.product.currencyCode }}
+        </div>
+        <div class="flex-none px-2 ">
+          <div class="flex flex-row">
+            <div *ngIf="basketProduct.showPawn">
+              <button class="btn btn-xs mr-1 pointer-events-none"
+                      [ngClass]="basketProduct.hasPawn === true && !hasSepcialPricesSelected ? 'bg-green-500' : 'bg-gray-100'">
+                <svg viewBox="0 0 1024 1024"
+                     class="icon sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path fill="#000000"
+                        d="M736 800V160H160v640a64 64 0 0064 64h448a64 64 0 0064-64zm64-544h63.552a96 96 0 0196 96v224a96 96 0 01-96 96H800v128a128 128 0 01-128 128H224A128 128 0 0196 800V128a32 32 0 0132-32h640a32 32 0 0132 32v128zm0 64v288h63.552a32 32 0 0032-32V352a32 32 0 00-32-32H800z" />
+                </svg>
+              </button>
+            </div>
+            <div>
+              <button class="btn btn-error btn-xs"
+                      (click)="removeItem(basketProduct)">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="1.5"
+                     stroke="currentColor"
+                     class="icon sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6">
+                  <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center m-5 font-thin lg:text-lg md:text-md  text-sm"
+         *ngIf="!basketProducts || basketProducts.length === 0">Keine Artikel</div>
+  </div>
+  <div class="divider"></div>
+  <div class="text-black"></div>
+  <div class="flex w-full justify-end">
+    <div class="font-thin lg:text-lg md:text-md text-sm">Bechereinsatz:&nbsp;</div>
+    <div class="flex-none lg:text-lg md:text-md text-sm">{{getCorrectDecimal(pawnAmount)}}</div>
+  </div>
+  <div class="flex w-full lg:text-lg md:text-md sm:text-sm">
+    <div class="flex-grow lg:text-lg md:text-md sm:text-sm">Summe:</div>
+    <div class="justify-center flex-none font-bold"
+         [ngClass]=" priceAmount > 0 ? 'text-green-500':  'text-red-500'">
+      <label *ngIf="priceAmount !== 0">{{ getCorrectDecimal(priceAmount) }} {{ currencyCode }}</label>
+    </div>
+    <div *ngIf="priceAmount === 0"
+         class="justify-center flex-none font-bold">-</div>
+  </div>
+  <div class="mt-2 flex flex-row gap-10">
+    <div class="w-1/3">
+      <a class="btn btn-success mt-5 w-full"
+         (click)="reset()"
+         [ngClass]="hasItems === false ? 'btn-disabled' :'btn-error text-white'">Abbrechen</a>
+    </div>
+    <div class="w-2/3">
+      <a class="btn btn-success w-full  mt-5"
+         href="#checkout-modal"
+         [ngClass]="hasItems === false ? 'btn-disabled' :'btn-success text-white'">Bezahlen</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal"
+     id="checkout-modal">
+  <div class="modal-box text-black">
+    <form method="dialog">
+      <a class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+         href="#">✕</a>
+    </form>
+    <p class="py-4">Zu bezahlender Betrag: {{ getCorrectDecimal( priceAmount) }} {{ currencyCode }}</p>
+    <div class="modal-action">
+      <a (click)="checkout()"
+         href="#"
+         class="btn btn-success text-white">Abschließen</a>
+    </div>
+  </div>
+</div>

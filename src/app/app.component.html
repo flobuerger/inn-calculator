@@ -1,0 +1,73 @@
+<div class="h-full flex flex-col max-w-full">
+    <div class="drawer max-w-full">
+        <input id="my-drawer"
+               type="checkbox"
+               class="drawer-toggle" />
+        <div class="drawer-content h-full flex flex-col max-w-full">
+            <div class="navbar bg-primary flex-initial max-w-full">
+                <div class="flex-none">
+                    <label for="my-drawer"
+                           class="btn btn-primary drawer-button"><svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             class="inline-block w-5 h-5 stroke-current">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg></label>
+
+                </div>
+                <div class="flex-1">
+                    <a class="btn btn-ghost normal-case text-xl">UFC-Haibach</a>
+                </div>
+                <div class="flex-none max-w-full ">
+                    <div class="dropdown dropdown-end ">
+                        <label tabindex="0"
+                               class="btn btn-ghost btn-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 class="inline-block w-5 h-5 stroke-current">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                            </svg>
+                        </label>
+                        <ul tabindex="0"
+                            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-gray-400">
+                            <li>
+                                <div class="form-control">
+                                    <label class="label cursor-pointer">
+                                        <input type="checkbox"
+                                               class="checkbox checkbox-sm checkbox-primary"
+                                               [(ngModel)]="hasSpecialPrices"
+                                               (change)="setProductsByState()" />
+                                        <span class="label-text ml-2 text-lg">Freitagspreise</span>
+
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="flex-grow">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <div class="drawer-side">
+            <label for="my-drawer"
+                   class="drawer-overlay"></label>
+            <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                <!-- Sidebar content here -->
+                <li><a href="/inn-calculator">Rechner</a></li>
+                <li><a href="/inn-calculator/sumup">Abrechnung</a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>

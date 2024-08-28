@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "e3fb571c-f51c-4301-8e39-4b6f5e80805d",
+		"name": "firebase",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27078014"
+	},
+	"item": [
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Add_Alkoholisch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fields\": {\n    \"id\": {\n        \"stringValue\": \"0\"\n    },\n    \"name\": {\n        \"stringValue\": \"Alkoholisch\"\n    },\n    \"displayName\": {\n        \"stringValue\": \"Alkoholisch\"\n    },\n    \"createdOn\":{\n        \"timestampValue\":\"2023-08-21T14:31:01Z\"\n    },\n    \"modifiedOn\":{\n        \"timestampValue\":\"2023-08-21T14:31:01Z\"\n    }\n  },\n  \"createTime\": \"2023-08-21T14:31:01Z\",\n  \"updateTime\": \"2023-08-21T14:31:01Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://firestore.googleapis.com/v1/projects/{{project_id}}/databases/(default)/documents/category",
+							"protocol": "https",
+							"host": [
+								"firestore",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"projects",
+								"{{project_id}}",
+								"databases",
+								"(default)",
+								"documents",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add_Anti_Alkoholisch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fields\": {\n    \"id\": {\n        \"stringValue\": \"1\"\n    },\n    \"name\": {\n        \"stringValue\": \"Anti-Alkoholisch\"\n    },\n    \"displayName\": {\n        \"stringValue\": \"Anti-Alkoholisch\"\n    },\n    \"createdOn\":{\n        \"timestampValue\":\"2023-08-21T14:31:01Z\"\n    },\n    \"modifiedOn\":{\n        \"timestampValue\":\"2023-08-21T14:31:01Z\"\n    }\n  },\n  \"createTime\": \"2023-08-21T14:31:01Z\",\n  \"updateTime\": \"2023-08-21T14:31:01Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://firestore.googleapis.com/v1/projects/{{project_id}}/databases/(default)/documents/category",
+							"protocol": "https",
+							"host": [
+								"firestore",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"projects",
+								"{{project_id}}",
+								"databases",
+								"(default)",
+								"documents",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add_Essen",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fields\": {\n    \"id\": {\n        \"stringValue\": \"2\"\n    },\n    \"name\": {\n        \"stringValue\": \"Essen\"\n    },\n    \"displayName\": {\n        \"stringValue\": \"Essen\"\n    },\n    \"createdOn\":{\n        \"timestampValue\":\"2023-08-21T14:31:01Z\"\n    },\n    \"modifiedOn\":{\n        \"timestampValue\":\"2023-08-21T14:31:01Z\"\n    }\n  },\n  \"createTime\": \"2023-08-21T14:31:01Z\",\n  \"updateTime\": \"2023-08-21T14:31:01Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://firestore.googleapis.com/v1/projects/{{project_id}}/databases/(default)/documents/category",
+							"protocol": "https",
+							"host": [
+								"firestore",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"projects",
+								"{{project_id}}",
+								"databases",
+								"(default)",
+								"documents",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add_Süsswaren",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fields\": {\n    \"id\": {\n        \"stringValue\": \"3\"\n    },\n    \"name\": {\n        \"stringValue\": \"Süsswaren\"\n    },\n    \"displayName\": {\n        \"stringValue\": \"Süsswaren\"\n    },\n    \"createdOn\":{\n        \"timestampValue\":\"2023-08-21T14:31:01Z\"\n    },\n    \"modifiedOn\":{\n        \"timestampValue\":\"2023-08-21T14:31:01Z\"\n    }\n  },\n  \"createTime\": \"2023-08-21T14:31:01Z\",\n  \"updateTime\": \"2023-08-21T14:31:01Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://firestore.googleapis.com/v1/projects/{{project_id}}/databases/(default)/documents/category",
+							"protocol": "https",
+							"host": [
+								"firestore",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"projects",
+								"{{project_id}}",
+								"databases",
+								"(default)",
+								"documents",
+								"category"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Add_Süsswaren Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fields\": {\n    \"id\": {\n        \"stringValue\": \"45\"\n    },\n    \"name\": {\n        \"stringValue\": \"Kuchen\"\n    },\n    \"subType\" :{\n        \"stringValue\": \"\"\n    },\n    \"shortDescription\": {\n        \"stringValue\": \"Kuchen\"\n    },\n    \"createdOn\":{\n        \"timestampValue\":\"2023-08-21T14:31:01Z\"\n    },\n    \"modifiedOn\":{\n        \"timestampValue\":\"2023-08-21T14:31:01Z\"\n    },\n    \"sortOrder\": {\n        \"integerValue\": \"45\"\n    },\n    \"productTypeEnum\": {\n        \"stringValue\": \"1\"\n    },\n    \"unit\": {\n        \"stringValue\": \"Stk.\"\n    },\n    \"unitAmount\": {\n        \"integerValue\": \"1\"\n    },\n    \"priceAmount\": {\n        \"doubleValue\": \"1.50\"\n    },\n    \"currencyCode\": {\n        \"stringValue\": \"EUR\"\n    },\n    \"categoryId\": {\n        \"integerValue\": \"2\"\n    },\n     \"hasPwan\": {\n        \"booleanValue\": \"true\"\n    },\n    \"showPAwn\": {\n        \"booleanValue\": \"true\"\n    },\n    \"pawnAmount\": {\n        \"doubleValue\": \"1.00\"\n    },\n  },\n  \"createTime\": \"2023-08-21T14:31:01Z\",\n  \"updateTime\": \"2023-08-21T14:31:01Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://firestore.googleapis.com/v1/projects/{{project_id}}/databases/(default)/documents/product",
+							"protocol": "https",
+							"host": [
+								"firestore",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"projects",
+								"{{project_id}}",
+								"databases",
+								"(default)",
+								"documents",
+								"product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ProductArea",
+			"item": [
+				{
+					"name": "Add_ProductArea",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fields\": {\n    \"id\": {\n        \"stringValue\": \"5\"\n    },\n    \"name\": {\n        \"stringValue\": \"Gespritzt\"\n    },\n    \"productAreaType\" :{\n        \"stringValue\": \"INJECTED\"\n    },\n    \"createdOn\":{\n        \"timestampValue\":\"2023-08-24T14:31:01Z\"\n    },\n    \"modifiedOn\":{\n        \"timestampValue\":\"2023-08-24T14:31:01Z\"\n    }\n  },\n  \"createTime\": \"2023-08-21T14:31:01Z\",\n  \"updateTime\": \"2023-08-21T14:31:01Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://firestore.googleapis.com/v1/projects/{{project_id}}/databases/(default)/documents/productArea",
+							"protocol": "https",
+							"host": [
+								"firestore",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"projects",
+								"{{project_id}}",
+								"databases",
+								"(default)",
+								"documents",
+								"productArea"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

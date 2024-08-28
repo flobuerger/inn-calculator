@@ -1,0 +1,16 @@
+.card_badge {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  width: 2rem;
+  height: 2rem;
+  font-size: x-large;
+  font-weight: lighter;
+}
+
+.divider::after {
+  background-color: grey;
+}
+.divider::before {
+  background-color: grey;
+}
