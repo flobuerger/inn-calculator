@@ -46,3 +46,8 @@ Thumbs.db
 
 public/
 inn-calculator/
+
+
+!.
+configuration/firebase.json
+build/gitlab-runner.sh
